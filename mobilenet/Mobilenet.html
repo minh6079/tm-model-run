@@ -655,10 +655,20 @@
     const btn = document.getElementById('classify-btn');
     btn.disabled = true;
     setStatus('Classifying…', 'active');
+
+    // small delay so UI can update before heavy inference blocks thread
+    await new Promise(r => setTimeout(r, 50));
+
     const img = new Image();
     img.onload = async () => {
       try {
-        const predictions = await model.classify(img, 5);
+        // draw to canvas first — more reliable than classifying img element directly
+        const canvas = document.createElement('canvas');
+        canvas.width = 224;
+        canvas.height = 224;
+        canvas.getContext('2d').drawImage(img, 0, 0, 224, 224);
+
+        const predictions = await model.classify(canvas, 5);
         renderPredictions(predictions);
         document.getElementById('result-img').src = img.src;
         document.getElementById('result-panel').classList.add('visible');
