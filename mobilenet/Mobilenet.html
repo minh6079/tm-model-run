@@ -13,279 +13,213 @@
     --accent: #7cffd4; --accent2: #ff6b6b; --accent3: #ffd97c;
     --text: #e8e8f0; --muted: #6b6b8a; --glow: 0 0 30px rgba(124,255,212,0.15);
   }
-  body {
-    background: var(--bg); color: var(--text); font-family: 'DM Sans', sans-serif;
-    min-height: 100vh; display: flex; flex-direction: column;
-    align-items: center; padding: 40px 20px 80px; overflow-x: hidden;
-  }
-  body::before {
-    content: ''; position: fixed; inset: 0;
-    background-image: linear-gradient(rgba(124,255,212,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(124,255,212,0.03) 1px, transparent 1px);
-    background-size: 40px 40px; pointer-events: none; z-index: 0;
-  }
-  .container { position: relative; z-index: 1; width: 100%; max-width: 560px; }
-  header { text-align: center; margin-bottom: 36px; }
-  .tag {
-    display: inline-block; font-family: 'Space Mono', monospace; font-size: 10px;
-    letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent);
-    border: 1px solid var(--accent); padding: 3px 10px; border-radius: 2px; margin-bottom: 14px; opacity: 0.8;
-  }
-  h1 { font-family: 'Space Mono', monospace; font-size: clamp(22px,5vw,32px); font-weight: 700; letter-spacing: -0.02em; line-height: 1.2; }
-  h1 span { color: var(--accent); }
-  .subtitle { margin-top: 8px; color: var(--muted); font-size: 14px; font-weight: 300; }
-  .panel { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 22px; margin-bottom: 16px; }
-  .panel-title { font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 14px; }
+  body { background:var(--bg); color:var(--text); font-family:'DM Sans',sans-serif; min-height:100vh; display:flex; flex-direction:column; align-items:center; padding:40px 20px 80px; overflow-x:hidden; }
+  body::before { content:''; position:fixed; inset:0; background-image:linear-gradient(rgba(124,255,212,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(124,255,212,0.03) 1px,transparent 1px); background-size:40px 40px; pointer-events:none; z-index:0; }
+  .container { position:relative; z-index:1; width:100%; max-width:560px; }
+  header { text-align:center; margin-bottom:36px; }
+  .tag { display:inline-block; font-family:'Space Mono',monospace; font-size:10px; letter-spacing:0.2em; text-transform:uppercase; color:var(--accent); border:1px solid var(--accent); padding:3px 10px; border-radius:2px; margin-bottom:14px; opacity:0.8; }
+  h1 { font-family:'Space Mono',monospace; font-size:clamp(22px,5vw,32px); font-weight:700; letter-spacing:-0.02em; line-height:1.2; }
+  h1 span { color:var(--accent); }
+  .subtitle { margin-top:8px; color:var(--muted); font-size:14px; font-weight:300; }
+  .panel { background:var(--surface); border:1px solid var(--border); border-radius:12px; padding:22px; margin-bottom:16px; }
+  .panel-title { font-family:'Space Mono',monospace; font-size:11px; letter-spacing:0.12em; text-transform:uppercase; color:var(--muted); margin-bottom:14px; }
 
-  /* MAIN TABS */
-  .main-tabs { display: flex; gap: 5px; background: var(--bg); border: 1px solid var(--border); border-radius: 8px; padding: 4px; margin-bottom: 18px; }
-  .main-tab {
-    flex: 1; font-family: 'Space Mono', monospace; font-size: 11px; font-weight: 700;
-    letter-spacing: 0.06em; text-transform: uppercase; border: none;
-    background: transparent; color: var(--muted); border-radius: 5px;
-    padding: 9px 8px; cursor: pointer; transition: all 0.18s;
-  }
-  .main-tab.active { background: var(--surface); color: var(--accent); border: 1px solid var(--border); }
-  .tab-content { display: none; }
-  .tab-content.active { display: block; }
+  .main-tabs { display:flex; gap:5px; background:var(--bg); border:1px solid var(--border); border-radius:8px; padding:4px; margin-bottom:18px; }
+  .main-tab { flex:1; font-family:'Space Mono',monospace; font-size:11px; font-weight:700; letter-spacing:0.06em; text-transform:uppercase; border:none; background:transparent; color:var(--muted); border-radius:5px; padding:9px 4px; cursor:pointer; transition:all 0.18s; }
+  .main-tab.active { background:var(--surface); color:var(--accent); border:1px solid var(--border); }
+  .tab-content { display:none; }
+  .tab-content.active { display:block; }
 
-  /* VERSION GROUP HEADER */
-  .ver-group { margin-bottom: 16px; }
-  .ver-header {
-    font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 0.14em;
-    text-transform: uppercase; color: var(--muted); margin-bottom: 10px;
-    display: flex; align-items: center; gap: 10px;
-  }
-  .ver-header::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+  .version-group { display:flex; gap:6px; margin-bottom:12px; }
+  .version-btn { flex:1; font-family:'Space Mono',monospace; font-size:11px; font-weight:700; letter-spacing:0.04em; border:1px solid var(--border); background:transparent; color:var(--muted); border-radius:7px; padding:11px 4px; cursor:pointer; transition:all 0.18s; text-align:center; }
+  .version-btn .vb-title { font-size:14px; display:block; margin-bottom:3px; }
+  .version-btn .vb-sub { font-size:9px; opacity:0.55; display:block; }
+  .version-btn:hover { border-color:var(--accent); color:var(--text); }
+  .version-btn.active { border-color:var(--accent); color:var(--accent); background:rgba(124,255,212,0.06); }
+  .version-btn.active .vb-sub { opacity:0.8; }
 
-  /* MODEL CARDS */
-  .model-cards { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
-  .model-card {
-    background: var(--bg); border: 1px solid var(--border); border-radius: 8px;
-    padding: 11px 8px; cursor: pointer; transition: all 0.18s; text-align: center; position: relative;
-  }
-  .model-card:hover { border-color: rgba(124,255,212,0.4); }
-  .model-card.selected { border-color: var(--accent); background: rgba(124,255,212,0.05); }
-  .mc-name { font-family: 'Space Mono', monospace; font-size: 12px; font-weight: 700; color: var(--text); margin-bottom: 4px; }
-  .model-card.selected .mc-name { color: var(--accent); }
-  .mc-sub { font-family: 'Space Mono', monospace; font-size: 9px; color: var(--muted); line-height: 1.5; }
-  .mc-badge {
-    display: none; position: absolute; top: -1px; right: -1px;
-    font-family: 'Space Mono', monospace; font-size: 7px; letter-spacing: 0.05em;
-    background: var(--accent); color: #0a0a0f; border-radius: 0 7px 0 4px; padding: 2px 5px; font-weight: 700;
-  }
-  .model-card.selected .mc-badge { display: block; }
+  .alpha-grid { display:none; grid-template-columns:repeat(4,1fr); gap:6px; margin-bottom:14px; }
+  .alpha-grid.v2 { grid-template-columns:repeat(3,1fr); }
+  .alpha-grid.visible { display:grid; }
+  .alpha-btn { font-family:'Space Mono',monospace; font-size:12px; font-weight:700; border:1px solid var(--border); background:var(--bg); color:var(--muted); border-radius:6px; padding:9px 4px; cursor:pointer; transition:all 0.18s; text-align:center; }
+  .alpha-btn.active { border-color:var(--accent3); color:var(--accent3); background:rgba(255,217,124,0.06); }
+  .alpha-btn:hover { border-color:var(--text); color:var(--text); }
 
-  /* FILE SLOTS */
-  .file-row { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 4px; }
-  .file-slot {
-    background: var(--bg); border: 1px dashed var(--border); border-radius: 8px;
-    padding: 14px 8px; text-align: center; cursor: pointer; transition: all 0.2s;
-    position: relative; overflow: hidden;
-  }
-  .file-slot:hover { border-color: var(--accent); }
-  .file-slot.loaded { border-color: var(--accent); border-style: solid; }
-  .file-slot.loaded .slot-icon { color: var(--accent); }
-  .slot-icon { font-size: 20px; margin-bottom: 4px; color: var(--muted); display: block; }
-  .slot-label { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); display: block; }
-  .slot-name { font-size: 9px; color: var(--accent); margin-top: 3px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 100%; display: block; padding: 0 4px; }
-  .file-slot input[type="file"] { position: absolute; inset: 0; opacity: 0; cursor: pointer; width: 100%; height: 100%; }
+  .file-grid { display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-bottom:4px; }
+  .file-slot { background:var(--bg); border:1px dashed var(--border); border-radius:8px; padding:14px 8px; text-align:center; cursor:pointer; transition:all 0.2s; position:relative; overflow:hidden; }
+  .file-slot:hover { border-color:var(--accent); }
+  .file-slot.loaded { border-color:var(--accent); border-style:solid; }
+  .file-slot.loaded .slot-icon { color:var(--accent); }
+  .slot-icon { font-size:20px; margin-bottom:4px; color:var(--muted); }
+  .slot-label { font-family:'Space Mono',monospace; font-size:9px; letter-spacing:0.1em; text-transform:uppercase; color:var(--muted); display:block; }
+  .slot-name { font-size:9px; color:var(--accent); margin-top:3px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; max-width:100%; display:block; padding:0 2px; }
+  .file-slot input[type="file"] { position:absolute; inset:0; opacity:0; cursor:pointer; width:100%; height:100%; }
 
-  /* INFO GRID */
-  .info-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 10px; margin: 14px 0 0; }
-  .info-tile { background: var(--bg); border: 1px solid var(--border); border-radius: 8px; padding: 12px; }
-  .info-tile-label { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 4px; }
-  .info-tile-value { font-family: 'Space Mono', monospace; font-size: 13px; font-weight: 700; color: var(--accent); }
+  .info-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:10px; margin-bottom:14px; }
+  .info-tile { background:var(--bg); border:1px solid var(--border); border-radius:8px; padding:12px; }
+  .info-tile-label { font-family:'Space Mono',monospace; font-size:9px; letter-spacing:0.12em; text-transform:uppercase; color:var(--muted); margin-bottom:4px; }
+  .info-tile-value { font-family:'Space Mono',monospace; font-size:13px; font-weight:700; color:var(--accent); }
 
-  /* BUTTONS & STATUS */
-  .btn { font-family: 'Space Mono', monospace; font-size: 12px; font-weight: 700; letter-spacing: 0.05em; border: none; border-radius: 8px; padding: 11px 22px; cursor: pointer; transition: all 0.2s; width: 100%; margin-top: 12px; }
-  .btn-primary { background: var(--accent); color: #0a0a0f; }
-  .btn-primary:hover { box-shadow: var(--glow); transform: translateY(-1px); }
-  .btn-primary:active { transform: translateY(0); }
-  .btn-primary:disabled { opacity: 0.35; cursor: not-allowed; transform: none; box-shadow: none; }
-  .btn-stop { background: transparent; color: var(--accent2); border: 1px solid var(--accent2); margin-top: 8px; }
-  .btn-stop:hover { background: rgba(255,107,107,0.08); }
-  .status { display: flex; align-items: center; gap: 8px; margin-top: 12px; font-size: 13px; color: var(--muted); min-height: 20px; }
-  .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--muted); flex-shrink: 0; }
-  .dot.active { background: var(--accent); animation: pulse 1.4s ease-in-out infinite; }
-  .dot.error { background: var(--accent2); }
-  .dot.ok { background: var(--accent); }
+  .source-tabs { display:flex; gap:6px; margin-bottom:16px; }
+  .source-tab { flex:1; font-family:'Space Mono',monospace; font-size:10px; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; border:1px solid var(--border); background:transparent; color:var(--muted); border-radius:6px; padding:8px; cursor:pointer; transition:all 0.18s; }
+  .source-tab.active { border-color:var(--accent3); color:var(--accent3); background:rgba(255,217,124,0.06); }
+  .source-content { display:none; }
+  .source-content.active { display:block; }
+
+  .image-drop { background:var(--bg); border:1px dashed var(--border); border-radius:10px; padding:36px 20px; text-align:center; cursor:pointer; transition:all 0.2s; position:relative; }
+  .image-drop:hover,.image-drop.drag-over { border-color:var(--accent3); background:rgba(255,217,124,0.03); }
+  .image-drop input[type="file"] { position:absolute; inset:0; opacity:0; cursor:pointer; width:100%; height:100%; }
+  .drop-icon { font-size:36px; margin-bottom:10px; }
+  .drop-text { font-family:'Space Mono',monospace; font-size:12px; color:var(--muted); }
+  .drop-text strong { color:var(--accent3); }
+  .preview-wrap { display:none; margin-top:14px; text-align:center; }
+  .preview-wrap img { max-width:100%; max-height:260px; border-radius:8px; border:1px solid var(--border); }
+
+  .btn { font-family:'Space Mono',monospace; font-size:12px; font-weight:700; letter-spacing:0.05em; border:none; border-radius:8px; padding:11px 22px; cursor:pointer; transition:all 0.2s; width:100%; margin-top:12px; }
+  .btn-primary { background:var(--accent); color:#0a0a0f; }
+  .btn-primary:hover { box-shadow:var(--glow); transform:translateY(-1px); }
+  .btn-primary:active { transform:translateY(0); }
+  .btn-primary:disabled { opacity:0.35; cursor:not-allowed; transform:none; box-shadow:none; }
+  .btn-stop { background:transparent; color:var(--accent2); border:1px solid var(--accent2); margin-top:8px; }
+  .btn-stop:hover { background:rgba(255,107,107,0.08); }
+
+  .status { display:flex; align-items:center; gap:8px; margin-top:12px; font-size:13px; color:var(--muted); min-height:20px; }
+  .dot { width:7px; height:7px; border-radius:50%; background:var(--muted); flex-shrink:0; }
+  .dot.active { background:var(--accent); animation:pulse 1.4s ease-in-out infinite; }
+  .dot.error { background:var(--accent2); }
+  .dot.ok { background:var(--accent); }
   @keyframes pulse { 0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(124,255,212,0.4)}50%{opacity:.7;box-shadow:0 0 0 5px rgba(124,255,212,0)} }
 
-  /* SOURCE TABS */
-  .source-tabs { display: flex; gap: 6px; margin-bottom: 16px; }
-  .source-tab { flex: 1; font-family: 'Space Mono', monospace; font-size: 10px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; border: 1px solid var(--border); background: transparent; color: var(--muted); border-radius: 6px; padding: 8px; cursor: pointer; transition: all 0.18s; }
-  .source-tab.active { border-color: var(--accent3); color: var(--accent3); background: rgba(255,217,124,0.06); }
-  .source-content { display: none; }
-  .source-content.active { display: block; }
-
-  /* IMAGE DROP */
-  .image-drop { background: var(--bg); border: 1px dashed var(--border); border-radius: 10px; padding: 36px 20px; text-align: center; cursor: pointer; transition: all 0.2s; position: relative; }
-  .image-drop:hover, .image-drop.drag-over { border-color: var(--accent3); background: rgba(255,217,124,0.03); }
-  .image-drop input[type="file"] { position: absolute; inset: 0; opacity: 0; cursor: pointer; width: 100%; height: 100%; }
-  .drop-icon { font-size: 36px; margin-bottom: 10px; }
-  .drop-text { font-family: 'Space Mono', monospace; font-size: 12px; color: var(--muted); }
-  .drop-text strong { color: var(--accent3); }
-  .preview-wrap { display: none; margin-top: 14px; text-align: center; }
-  .preview-wrap img { max-width: 100%; max-height: 260px; border-radius: 8px; border: 1px solid var(--border); }
-
-  /* WEBCAM */
-  .live-panel { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; margin-bottom: 16px; display: none; }
-  .live-panel.visible { display: block; }
-  .live-header { padding: 12px 18px; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 8px; font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
-  .rec-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--accent2); animation: pulse-red 1s ease-in-out infinite; }
+  .live-panel { background:var(--surface); border:1px solid var(--border); border-radius:12px; overflow:hidden; margin-bottom:16px; display:none; }
+  .live-panel.visible { display:block; }
+  .live-header { padding:12px 18px; border-bottom:1px solid var(--border); display:flex; align-items:center; gap:8px; font-family:'Space Mono',monospace; font-size:11px; letter-spacing:0.1em; text-transform:uppercase; color:var(--muted); }
+  .rec-dot { width:7px; height:7px; border-radius:50%; background:var(--accent2); animation:pulse-red 1s ease-in-out infinite; }
   @keyframes pulse-red { 0%,100%{opacity:1}50%{opacity:.3} }
-  .webcam-container { display: flex; justify-content: center; align-items: center; padding: 20px; background: #080810; }
-  .webcam-container video { border-radius: 8px; max-width: 100%; width: 300px; height: 300px; object-fit: cover; }
-  .live-footer { padding: 12px 18px; border-top: 1px solid var(--border); }
+  .webcam-container { display:flex; justify-content:center; align-items:center; padding:20px; background:#080810; }
+  .webcam-container video { border-radius:8px; max-width:100%; width:300px; height:300px; object-fit:cover; }
+  .live-footer { padding:12px 18px; border-top:1px solid var(--border); }
 
-  /* RESULT + PREDICTIONS */
-  .result-image-panel { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; margin-bottom: 16px; display: none; }
-  .result-image-panel.visible { display: block; }
-  .result-header { padding: 12px 18px; border-bottom: 1px solid var(--border); font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
-  .result-img-wrap { background: #080810; display: flex; justify-content: center; align-items: center; padding: 20px; }
-  .result-img-wrap img { max-width: 100%; max-height: 260px; border-radius: 8px; }
-  .predictions-panel { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; display: none; margin-bottom: 16px; }
-  .predictions-panel.visible { display: block; }
-  .top-prediction { display: flex; align-items: center; justify-content: space-between; padding: 16px 20px; background: rgba(124,255,212,0.05); border-bottom: 1px solid rgba(124,255,212,0.12); gap: 12px; }
-  .top-prediction-left { display: flex; flex-direction: column; gap: 3px; }
-  .top-label { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); opacity: 0.7; }
-  .top-class-name { font-family: 'Space Mono', monospace; font-size: 20px; font-weight: 700; color: var(--accent); letter-spacing: -0.01em; line-height: 1.1; transition: all 0.2s; }
-  .top-pct-wrap { display: flex; flex-direction: column; align-items: flex-end; gap: 3px; flex-shrink: 0; }
-  .top-pct { font-family: 'Space Mono', monospace; font-size: 32px; font-weight: 700; color: var(--accent); line-height: 1; transition: all 0.15s; }
-  .top-pct-label { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
-  .top-bar-track { height: 3px; background: var(--border); }
-  .top-bar-fill { height: 100%; background: var(--accent); transition: width 0.2s; box-shadow: 0 0 8px rgba(124,255,212,0.4); }
-  .all-classes { padding: 16px 20px; }
-  .predictions-title { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-bottom: 14px; }
-  .prediction-item { margin-bottom: 13px; }
-  .prediction-item:last-child { margin-bottom: 0; }
-  .prediction-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 5px; }
-  .class-label { font-family: 'Space Mono', monospace; font-size: 12px; color: var(--text); }
-  .prob-value { font-family: 'Space Mono', monospace; font-size: 12px; min-width: 40px; text-align: right; }
-  .bar-track { height: 4px; background: var(--border); border-radius: 2px; overflow: hidden; }
-  .bar-fill { height: 100%; border-radius: 2px; transition: width 0.3s; }
-  footer { margin-top: 24px; text-align: center; font-size: 12px; color: var(--muted); font-family: 'Space Mono', monospace; }
-  footer a { color: var(--accent); text-decoration: none; }
-  footer a:hover { text-decoration: underline; }
+  .result-image-panel { background:var(--surface); border:1px solid var(--border); border-radius:12px; overflow:hidden; margin-bottom:16px; display:none; }
+  .result-image-panel.visible { display:block; }
+  .result-header { padding:12px 18px; border-bottom:1px solid var(--border); font-family:'Space Mono',monospace; font-size:11px; letter-spacing:0.1em; text-transform:uppercase; color:var(--muted); }
+  .result-img-wrap { background:#080810; display:flex; justify-content:center; align-items:center; padding:20px; }
+  .result-img-wrap img { max-width:100%; max-height:260px; border-radius:8px; }
+
+  .predictions-panel { background:var(--surface); border:1px solid var(--border); border-radius:12px; overflow:hidden; display:none; margin-bottom:16px; }
+  .predictions-panel.visible { display:block; }
+  .top-prediction { display:flex; align-items:center; justify-content:space-between; padding:16px 20px; background:rgba(124,255,212,0.05); border-bottom:1px solid rgba(124,255,212,0.12); gap:12px; }
+  .top-prediction-left { display:flex; flex-direction:column; gap:3px; }
+  .top-label { font-family:'Space Mono',monospace; font-size:9px; letter-spacing:0.18em; text-transform:uppercase; color:var(--accent); opacity:0.7; }
+  .top-class-name { font-family:'Space Mono',monospace; font-size:20px; font-weight:700; color:var(--accent); letter-spacing:-0.01em; line-height:1.1; transition:all 0.2s; }
+  .top-pct-wrap { display:flex; flex-direction:column; align-items:flex-end; gap:3px; flex-shrink:0; }
+  .top-pct { font-family:'Space Mono',monospace; font-size:32px; font-weight:700; color:var(--accent); line-height:1; transition:all 0.15s; }
+  .top-pct-label { font-family:'Space Mono',monospace; font-size:9px; letter-spacing:0.12em; text-transform:uppercase; color:var(--muted); }
+  .top-bar-track { height:3px; background:var(--border); }
+  .top-bar-fill { height:100%; background:var(--accent); transition:width 0.2s; box-shadow:0 0 8px rgba(124,255,212,0.4); }
+  .all-classes { padding:16px 20px; }
+  .predictions-title { font-family:'Space Mono',monospace; font-size:10px; letter-spacing:0.14em; text-transform:uppercase; color:var(--muted); margin-bottom:14px; }
+  .prediction-item { margin-bottom:13px; }
+  .prediction-item:last-child { margin-bottom:0; }
+  .prediction-row { display:flex; justify-content:space-between; align-items:center; margin-bottom:5px; }
+  .class-label { font-family:'Space Mono',monospace; font-size:12px; color:var(--text); }
+  .prob-value { font-family:'Space Mono',monospace; font-size:12px; min-width:40px; text-align:right; }
+  .bar-track { height:4px; background:var(--border); border-radius:2px; overflow:hidden; }
+  .bar-fill { height:100%; background:var(--accent); border-radius:2px; transition:width 0.3s; }
+
+  footer { margin-top:24px; text-align:center; font-size:12px; color:var(--muted); font-family:'Space Mono',monospace; }
+  footer a { color:var(--accent); text-decoration:none; }
+  footer a:hover { text-decoration:underline; }
 </style>
 </head>
 <body>
 <div class="container">
+
   <header>
     <div class="tag">ImageNet · 1000 Classes · MobileNet</div>
     <h1>Mobile<span>Net</span></h1>
-    <p class="subtitle">Image classifier — local files or online source</p>
+    <p class="subtitle">MobileNet V1 &amp; V2 image classifier — 1000 ImageNet classes</p>
   </header>
 
   <div class="panel">
-    <div class="panel-title">① Load Model</div>
+    <div class="panel-title">&#9312; Load Model</div>
 
     <div class="main-tabs">
-      <button class="main-tab active" onclick="switchTab('online')">🌐 Online Source</button>
-      <button class="main-tab" onclick="switchTab('local')">📁 Local Files</button>
+      <button class="main-tab active" onclick="switchMainTab('local')">&#128193; Local Files</button>
+      <button class="main-tab" onclick="switchMainTab('online')">&#127760; Online Source</button>
     </div>
 
-    <!-- ONLINE TAB -->
-    <div class="tab-content active" id="tab-online">
-
-      <div class="ver-group">
-        <div class="ver-header">MobileNet V1</div>
-        <div class="model-cards">
-          <div class="model-card selected" id="card-v1-025" onclick="selectCard('v1-025')">
-            <span class="mc-badge">✓</span>
-            <div class="mc-name">α 0.25</div>
-            <div class="mc-sub">~2MB<br/>fastest</div>
-          </div>
-          <div class="model-card" id="card-v1-050" onclick="selectCard('v1-050')">
-            <span class="mc-badge">✓</span>
-            <div class="mc-name">α 0.50</div>
-            <div class="mc-sub">~5MB<br/>light</div>
-          </div>
-          <div class="model-card" id="card-v1-075" onclick="selectCard('v1-075')">
-            <span class="mc-badge">✓</span>
-            <div class="mc-name">α 0.75</div>
-            <div class="mc-sub">~8MB<br/>balanced</div>
-          </div>
-          <div class="model-card" id="card-v1-100" onclick="selectCard('v1-100')">
-            <span class="mc-badge">✓</span>
-            <div class="mc-name">α 1.00</div>
-            <div class="mc-sub">~16MB<br/>full V1</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="ver-group">
-        <div class="ver-header">MobileNet V2</div>
-        <div class="model-cards" style="grid-template-columns:repeat(3,1fr)">
-          <div class="model-card" id="card-v2-050" onclick="selectCard('v2-050')">
-            <span class="mc-badge">✓</span>
-            <div class="mc-name">α 0.50</div>
-            <div class="mc-sub">~7MB<br/>compact</div>
-          </div>
-          <div class="model-card" id="card-v2-075" onclick="selectCard('v2-075')">
-            <span class="mc-badge">✓</span>
-            <div class="mc-name">α 0.75</div>
-            <div class="mc-sub">~10MB<br/>balanced</div>
-          </div>
-          <div class="model-card" id="card-v2-100" onclick="selectCard('v2-100')">
-            <span class="mc-badge">✓</span>
-            <div class="mc-name">α 1.00</div>
-            <div class="mc-sub">~14MB<br/>best acc</div>
-          </div>
-        </div>
-      </div>
-
-      <button class="btn btn-primary" id="online-load-btn" onclick="loadOnline()">Load Model</button>
-    </div>
-
-    <!-- LOCAL TAB -->
-    <div class="tab-content" id="tab-local">
-      <div class="file-row">
+    <!-- LOCAL FILES TAB -->
+    <div class="tab-content active" id="tab-local">
+      <div class="file-grid">
         <div class="file-slot" id="slot-model">
-          <span class="slot-icon">📄</span>
+          <div class="slot-icon">&#128196;</div>
           <span class="slot-label">model.json</span>
           <span class="slot-name" id="name-model">click to pick</span>
           <input type="file" accept=".json" onchange="pickFile(this,'model')"/>
         </div>
         <div class="file-slot" id="slot-weights">
-          <span class="slot-icon">⚖️</span>
+          <div class="slot-icon">&#9878;&#65039;</div>
           <span class="slot-label">weights .bin(s)</span>
           <span class="slot-name" id="name-weights">click to pick</span>
           <input type="file" accept=".bin" multiple onchange="pickFile(this,'weights')"/>
         </div>
       </div>
-      <button class="btn btn-primary" id="local-load-btn" onclick="loadLocal()">Load Model</button>
     </div>
 
-    <!-- SHARED INFO + STATUS -->
-    <div class="info-grid">
-      <div class="info-tile"><div class="info-tile-label">Model</div><div class="info-tile-value" id="info-model">V1 α0.25</div></div>
-      <div class="info-tile"><div class="info-tile-label">Classes</div><div class="info-tile-value">1,000</div></div>
-      <div class="info-tile"><div class="info-tile-label">Input</div><div class="info-tile-value">224×224</div></div>
-      <div class="info-tile"><div class="info-tile-label">Source</div><div class="info-tile-value" id="info-source">Online</div></div>
+    <!-- ONLINE SOURCE TAB -->
+    <div class="tab-content" id="tab-online">
+      <div class="version-group">
+        <button class="version-btn active" id="vbtn-1" onclick="selectVersion(1)">
+          <span class="vb-title">MobileNet V1</span>
+          <span class="vb-sub">&#945; 0.25 &middot; 0.50 &middot; 0.75 &middot; 1.00</span>
+        </button>
+        <button class="version-btn" id="vbtn-2" onclick="selectVersion(2)">
+          <span class="vb-title">MobileNet V2</span>
+          <span class="vb-sub">&#945; 0.50 &middot; 0.75 &middot; 1.00</span>
+        </button>
+      </div>
+      <div class="alpha-grid visible" id="alpha-v1">
+        <button class="alpha-btn" onclick="selectAlpha(0.25)">0.25</button>
+        <button class="alpha-btn" onclick="selectAlpha(0.50)">0.50</button>
+        <button class="alpha-btn" onclick="selectAlpha(0.75)">0.75</button>
+        <button class="alpha-btn active" onclick="selectAlpha(1.00)">1.00</button>
+      </div>
+      <div class="alpha-grid v2" id="alpha-v2">
+        <button class="alpha-btn" onclick="selectAlpha(0.50)">0.50</button>
+        <button class="alpha-btn" onclick="selectAlpha(0.75)">0.75</button>
+        <button class="alpha-btn active" onclick="selectAlpha(1.00)">1.00</button>
+      </div>
     </div>
+
+    <div class="info-grid" style="margin-top:14px">
+      <div class="info-tile"><div class="info-tile-label">Version</div><div class="info-tile-value" id="tile-ver">&#8212;</div></div>
+      <div class="info-tile"><div class="info-tile-label">Alpha</div><div class="info-tile-value" id="tile-alpha">&#8212;</div></div>
+      <div class="info-tile"><div class="info-tile-label">Classes</div><div class="info-tile-value">1,000</div></div>
+      <div class="info-tile"><div class="info-tile-label">Source</div><div class="info-tile-value" id="tile-source">Local</div></div>
+    </div>
+
+    <button class="btn btn-primary" id="load-btn" onclick="loadModel()">Load MobileNet</button>
     <div class="status">
       <span class="dot" id="status-dot"></span>
-      <span id="status-text">Select a model and click Load</span>
+      <span id="status-text">Choose a source above then click Load</span>
     </div>
   </div>
 
-  <!-- INPUT PANEL -->
   <div class="panel" id="input-panel" style="display:none">
-    <div class="panel-title">② Choose Input</div>
+    <div class="panel-title">&#9313; Choose Input</div>
     <div class="source-tabs">
-      <button class="source-tab active" onclick="switchSource('webcam')">📷 Webcam</button>
-      <button class="source-tab" onclick="switchSource('image')">🖼 Image File</button>
+      <button class="source-tab active" onclick="switchSource('webcam')">&#128247; Webcam</button>
+      <button class="source-tab" onclick="switchSource('image')">&#128444;&#65039; Image File</button>
     </div>
     <div class="source-content active" id="source-webcam">
       <button class="btn btn-primary" id="start-cam-btn" onclick="startWebcam()">Start Camera</button>
     </div>
     <div class="source-content" id="source-image">
-      <div class="image-drop" id="image-drop"
+      <div class="image-drop"
         ondragover="event.preventDefault();this.classList.add('drag-over')"
         ondragleave="this.classList.remove('drag-over')"
         ondrop="handleDrop(event)">
-        <div class="drop-icon">🖼</div>
+        <div class="drop-icon">&#128444;&#65039;</div>
         <div class="drop-text"><strong>Drop image here</strong> or click to browse</div>
         <input type="file" accept="image/*" onchange="handleFileSelect(this)"/>
       </div>
@@ -296,28 +230,25 @@
     </div>
   </div>
 
-  <!-- WEBCAM LIVE -->
   <div class="live-panel" id="webcam-panel">
     <div class="live-header"><div class="rec-dot"></div> Live Camera</div>
     <div class="webcam-container" id="webcam-container"></div>
-    <div class="live-footer"><button class="btn btn-stop" onclick="stopWebcam()">■ Stop Camera</button></div>
+    <div class="live-footer"><button class="btn btn-stop" onclick="stopWebcam()">&#9632; Stop Camera</button></div>
   </div>
 
-  <!-- RESULT IMAGE -->
   <div class="result-image-panel" id="result-panel">
     <div class="result-header">Classified Image</div>
     <div class="result-img-wrap"><img id="result-img" src="" alt="result"/></div>
   </div>
 
-  <!-- PREDICTIONS -->
   <div class="predictions-panel" id="predictions-panel">
     <div class="top-prediction">
       <div class="top-prediction-left">
         <span class="top-label">Most Confident</span>
-        <span class="top-class-name" id="top-name">—</span>
+        <span class="top-class-name" id="top-name">&#8212;</span>
       </div>
       <div class="top-pct-wrap">
-        <span class="top-pct" id="top-pct">—</span>
+        <span class="top-pct" id="top-pct">&#8212;</span>
         <span class="top-pct-label">confidence</span>
       </div>
     </div>
@@ -336,246 +267,212 @@
 
 <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/mobilenet@2.1.1/dist/mobilenet.min.js"></script>
 <script>
-  let model = null, isLocalModel = false;
-  let running = false, videoEl = null, videoStream = null, selectedImage = null;
-  let selectedCard = 'v1-025';
-  let localFiles = { model: null, weights: [] };
+  let model=null,running=false,videoEl=null,videoStream=null,selectedImage=null;
+  let mainTab='local',selVersion=1,selAlpha=1.0;
+  let localFiles={model:null,weights:[]};
 
-  const CARDS = {
-    'v1-025': { version: 1, alpha: 0.25, label: 'V1 α0.25' },
-    'v1-050': { version: 1, alpha: 0.50, label: 'V1 α0.50' },
-    'v1-075': { version: 1, alpha: 0.75, label: 'V1 α0.75' },
-    'v1-100': { version: 1, alpha: 1.00, label: 'V1 α1.00' },
-    'v2-050': { version: 2, alpha: 0.50, label: 'V2 α0.50' },
-    'v2-075': { version: 2, alpha: 0.75, label: 'V2 α0.75' },
-    'v2-100': { version: 2, alpha: 1.00, label: 'V2 α1.00' },
-  };
-
-  function switchTab(tab) {
-    document.querySelectorAll('.main-tab').forEach((t,i) =>
-      t.classList.toggle('active',(i===0&&tab==='online')||(i===1&&tab==='local')));
-    document.getElementById('tab-online').classList.toggle('active', tab==='online');
-    document.getElementById('tab-local').classList.toggle('active', tab==='local');
-    document.getElementById('info-source').textContent = tab==='online' ? 'Online' : 'Local';
+  function switchMainTab(tab){
+    mainTab=tab;
+    document.querySelectorAll('.main-tab').forEach((t,i)=>t.classList.toggle('active',(i===0&&tab==='local')||(i===1&&tab==='online')));
+    document.getElementById('tab-local').classList.toggle('active',tab==='local');
+    document.getElementById('tab-online').classList.toggle('active',tab==='online');
+    refreshTiles();
   }
 
-  function selectCard(key) {
-    if (model) return;
-    selectedCard = key;
-    document.querySelectorAll('.model-card').forEach(c => c.classList.remove('selected'));
-    document.getElementById('card-'+key).classList.add('selected');
-    document.getElementById('info-model').textContent = CARDS[key].label;
+  function selectVersion(v){
+    selVersion=v; selAlpha=1.0;
+    document.getElementById('vbtn-1').classList.toggle('active',v===1);
+    document.getElementById('vbtn-2').classList.toggle('active',v===2);
+    document.getElementById('alpha-v1').classList.toggle('visible',v===1);
+    document.getElementById('alpha-v2').classList.toggle('visible',v===2);
+    document.querySelectorAll('#alpha-v1 .alpha-btn,#alpha-v2 .alpha-btn').forEach(b=>b.classList.remove('active'));
+    const btns=document.querySelectorAll('#alpha-v'+v+' .alpha-btn');
+    btns[btns.length-1].classList.add('active');
+    refreshTiles();
   }
 
-  function setStatus(msg, state) {
-    document.getElementById('status-text').textContent = msg;
-    document.getElementById('status-dot').className = 'dot' + (state ? ' '+state : '');
+  function selectAlpha(a){
+    selAlpha=a;
+    document.querySelectorAll('#alpha-v'+selVersion+' .alpha-btn').forEach(b=>{
+      b.classList.toggle('active',Math.abs(parseFloat(b.textContent)-a)<0.01);
+    });
+    refreshTiles();
   }
 
-  // ── ONLINE LOAD ──
-  async function loadOnline() {
-    const cfg = CARDS[selectedCard];
-    document.getElementById('online-load-btn').disabled = true;
-    document.querySelectorAll('.model-card').forEach(c => c.style.pointerEvents='none');
-    setStatus('Loading ' + cfg.label + ' from CDN…', 'active');
-    try {
-      model = await mobilenet.load({ version: cfg.version, alpha: cfg.alpha });
-      isLocalModel = false;
-      setStatus(cfg.label + ' loaded — 1000 classes ready', 'ok');
-      onModelReady();
-    } catch(e) {
-      setStatus('Error: ' + e.message, 'error');
-      document.getElementById('online-load-btn').disabled = false;
-      document.querySelectorAll('.model-card').forEach(c => c.style.pointerEvents='');
+  function refreshTiles(){
+    if(mainTab==='local'){
+      document.getElementById('tile-ver').textContent='—';
+      document.getElementById('tile-alpha').textContent='—';
+      document.getElementById('tile-source').textContent='Local';
+    } else {
+      document.getElementById('tile-ver').textContent='V'+selVersion;
+      document.getElementById('tile-alpha').textContent=selAlpha.toFixed(2);
+      document.getElementById('tile-source').textContent='TF Hub';
     }
   }
 
-  // ── LOCAL LOAD ──
-  function pickFile(input, type) {
-    if (type === 'model') {
-      const f = input.files[0]; if (!f) return;
-      localFiles.model = f;
-      document.getElementById('name-model').textContent = f.name;
+  function pickFile(input,type){
+    if(type==='model'){
+      const f=input.files[0]; if(!f) return;
+      localFiles.model=f;
+      document.getElementById('name-model').textContent=f.name;
       document.getElementById('slot-model').classList.add('loaded');
     } else {
-      const files = Array.from(input.files); if (!files.length) return;
-      localFiles.weights = files;
-      document.getElementById('name-weights').textContent = files.length + ' file(s)';
+      const files=Array.from(input.files); if(!files.length) return;
+      localFiles.weights=files;
+      document.getElementById('name-weights').textContent=files.length+' file(s)';
       document.getElementById('slot-weights').classList.add('loaded');
     }
   }
 
-  async function loadLocal() {
-    if (!localFiles.model || !localFiles.weights.length) {
-      setStatus('Pick model.json + .bin file(s) first.', 'error'); return;
-    }
-    document.getElementById('local-load-btn').disabled = true;
-    setStatus('Loading local model…', 'active');
-    try {
-      const modelUrl = URL.createObjectURL(localFiles.model);
-      const wmap = {};
-      localFiles.weights.forEach(f => { wmap[f.name] = URL.createObjectURL(f); });
-      const _fetch = window.fetch;
-      window.fetch = (url, opts) => {
-        const fname = url.toString().split('/').pop().split('?')[0];
-        return wmap[fname] ? _fetch(wmap[fname], opts) : _fetch(url, opts);
-      };
-      model = await tf.loadLayersModel(modelUrl);
-      window.fetch = _fetch;
-      isLocalModel = true;
-      // warmup
-      const d = tf.zeros([1,224,224,3]);
-      const o = model.predict(d);
-      await o.data();
-      d.dispose(); o.dispose();
-      document.getElementById('info-model').textContent = 'Local';
-      document.getElementById('info-source').textContent = 'Local';
-      setStatus('Local model loaded — ready', 'ok');
-      onModelReady();
-    } catch(e) {
-      setStatus('Error: ' + e.message, 'error');
-      document.getElementById('local-load-btn').disabled = false;
-    }
-  }
-
-  function onModelReady() {
-    document.getElementById('input-panel').style.display = 'block';
-    document.getElementById('predictions-panel').classList.add('visible');
-  }
-
-  // ── PREDICT ──
-  async function runInference(source) {
-    if (isLocalModel) {
-      const logits = tf.tidy(() => {
-        const img = tf.browser.fromPixels(source);
-        const resized = tf.image.resizeBilinear(img, [224, 224]);
-        return model.predict(resized.div(255.0).expandDims(0));
-      });
-      const probs = tf.softmax(logits);
-      const data = await probs.data();
-      logits.dispose(); probs.dispose();
-      const indexed = Array.from(data).map((p,i) => ({prob:p,idx:i}));
-      indexed.sort((a,b) => b.prob - a.prob);
-      return indexed.slice(0,5).map(({prob,idx}) => ({
-        className: IMAGENET_CLASSES[idx] || 'class_'+idx,
-        probability: prob
-      }));
-    } else {
-      return await model.classify(source, 5);
+  async function loadModel(){
+    document.getElementById('load-btn').disabled=true;
+    setStatus('Loading…','active');
+    try{
+      if(mainTab==='local'){
+        if(!localFiles.model||!localFiles.weights.length){
+          setStatus('Pick model.json + .bin file(s) first.','error');
+          document.getElementById('load-btn').disabled=false; return;
+        }
+        const modelUrl=URL.createObjectURL(localFiles.model);
+        const weightMap={};
+        localFiles.weights.forEach(f=>{weightMap[f.name]=URL.createObjectURL(f);});
+        const orig=window.fetch;
+        window.fetch=(url,opts)=>{
+          const fname=url.toString().split('/').pop().split('?')[0];
+          if(weightMap[fname]) return orig(weightMap[fname],opts);
+          return orig(url,opts);
+        };
+        model=await mobilenet.load({modelUrl});
+        window.fetch=orig;
+        document.getElementById('tile-ver').textContent='Local';
+        document.getElementById('tile-alpha').textContent='—';
+        document.getElementById('tile-source').textContent='Local';
+        setStatus('Local model loaded — 1000 classes ready','ok');
+      } else {
+        setStatus('Loading MobileNet V'+selVersion+' α'+selAlpha.toFixed(2)+' from TF Hub…','active');
+        model=await mobilenet.load({version:selVersion,alpha:selAlpha});
+        setStatus('MobileNet V'+selVersion+' α'+selAlpha.toFixed(2)+' ready','ok');
+      }
+      document.getElementById('input-panel').style.display='block';
+      document.getElementById('predictions-panel').classList.add('visible');
+    }catch(e){
+      setStatus('Error: '+e.message,'error');
+      document.getElementById('load-btn').disabled=false;
     }
   }
 
-  function renderPredictions(predictions) {
-    if (!predictions || !predictions.length) return;
-    const top = predictions[0];
-    const topPct = Math.round(top.probability * 100);
-    document.getElementById('top-name').textContent = top.className;
-    document.getElementById('top-pct').textContent = topPct + '%';
-    document.getElementById('top-bar').style.width = topPct + '%';
-    const container = document.getElementById('label-container');
-    container.innerHTML = '';
-    predictions.forEach((p, i) => {
-      const pct = Math.round(p.probability * 100);
-      const col = i===0 ? 'var(--accent)' : 'var(--muted)';
-      const item = document.createElement('div');
-      item.className = 'prediction-item';
-      item.innerHTML = `<div class="prediction-row"><span class="class-label">${p.className}</span><span class="prob-value" style="color:${col}">${pct}%</span></div><div class="bar-track"><div class="bar-fill" style="width:${pct}%;background:${col}"></div></div>`;
-      container.appendChild(item);
+  function setStatus(msg,state){
+    document.getElementById('status-text').textContent=msg;
+    document.getElementById('status-dot').className='dot'+(state?' '+state:'');
+  }
+
+  function renderPredictions(predictions){
+    if(!predictions||!predictions.length) return;
+    const top=predictions[0];
+    const topPct=Math.round(top.probability*100);
+    document.getElementById('top-name').textContent=top.className;
+    document.getElementById('top-pct').textContent=topPct+'%';
+    document.getElementById('top-bar').style.width=topPct+'%';
+    const c=document.getElementById('label-container');
+    c.innerHTML='';
+    predictions.forEach((p,i)=>{
+      const pct=Math.round(p.probability*100);
+      const item=document.createElement('div');
+      item.className='prediction-item';
+      item.innerHTML='<div class="prediction-row"><span class="class-label">'+p.className+'</span><span class="prob-value" style="color:'+(i===0?'var(--accent)':'var(--muted)')+'">'+pct+'%</span></div><div class="bar-track"><div class="bar-fill" style="width:'+pct+'%;background:'+(i===0?'var(--accent)':'var(--muted)')+'"></div></div>';
+      c.appendChild(item);
     });
   }
 
-  // ── SOURCE SWITCH ──
-  function switchSource(source) {
-    document.querySelectorAll('.source-tab').forEach((t,i) =>
-      t.classList.toggle('active',(i===0&&source==='webcam')||(i===1&&source==='image')));
-    document.getElementById('source-webcam').classList.toggle('active', source==='webcam');
-    document.getElementById('source-image').classList.toggle('active', source==='image');
-    if (source !== 'webcam') stopWebcam();
-    if (source !== 'image') document.getElementById('result-panel').classList.remove('visible');
+  function switchSource(source){
+    document.querySelectorAll('.source-tab').forEach((t,i)=>t.classList.toggle('active',(i===0&&source==='webcam')||(i===1&&source==='image')));
+    document.getElementById('source-webcam').classList.toggle('active',source==='webcam');
+    document.getElementById('source-image').classList.toggle('active',source==='image');
+    if(source!=='webcam') stopWebcam();
+    if(source!=='image') document.getElementById('result-panel').classList.remove('visible');
   }
 
-  // ── WEBCAM ──
-  async function startWebcam() {
-    document.getElementById('start-cam-btn').disabled = true;
-    setStatus('Starting webcam…', 'active');
-    try {
-      videoStream = await navigator.mediaDevices.getUserMedia({ video: { width: 300, height: 300 } });
-      videoEl = document.createElement('video');
-      videoEl.srcObject = videoStream;
-      videoEl.setAttribute('playsinline', true);
-      videoEl.muted = true;
+  async function startWebcam(){
+    document.getElementById('start-cam-btn').disabled=true;
+    setStatus('Starting webcam…','active');
+    try{
+      videoStream=await navigator.mediaDevices.getUserMedia({video:{width:300,height:300}});
+      videoEl=document.createElement('video');
+      videoEl.srcObject=videoStream;
+      videoEl.setAttribute('playsinline',true);
+      videoEl.muted=true;
       await videoEl.play();
-      document.getElementById('webcam-container').innerHTML = '';
+      document.getElementById('webcam-container').innerHTML='';
       document.getElementById('webcam-container').appendChild(videoEl);
       document.getElementById('webcam-panel').classList.add('visible');
       document.getElementById('result-panel').classList.remove('visible');
-      running = true;
-      setStatus('Camera live — predicting…', 'active');
+      running=true;
+      setStatus('Camera live — predicting…','active');
       camLoop();
-    } catch(e) {
-      setStatus('Camera error: ' + e.message, 'error');
-      document.getElementById('start-cam-btn').disabled = false;
+    }catch(e){
+      setStatus('Camera error: '+e.message,'error');
+      document.getElementById('start-cam-btn').disabled=false;
     }
   }
 
-  async function camLoop() {
-    if (!running || !videoEl) return;
-    try { renderPredictions(await runInference(videoEl)); } catch(e) {}
-    setTimeout(camLoop, 350);
+  async function camLoop(){
+    if(!running||!videoEl) return;
+    try{const p=await model.classify(videoEl,5);renderPredictions(p);}catch(e){}
+    setTimeout(camLoop,350);
   }
 
-  function stopWebcam() {
-    running = false;
-    if (videoStream) { videoStream.getTracks().forEach(t => t.stop()); videoStream = null; }
+  function stopWebcam(){
+    running=false;
+    if(videoStream){videoStream.getTracks().forEach(t=>t.stop());videoStream=null;}
     document.getElementById('webcam-panel').classList.remove('visible');
-    const btn = document.getElementById('start-cam-btn');
-    if (btn) btn.disabled = false;
-    if (model) setStatus('Model ready — choose an input method', 'ok');
+    const btn=document.getElementById('start-cam-btn');
+    if(btn) btn.disabled=false;
+    if(model) setStatus('Model ready — choose an input method','ok');
   }
 
-  // ── IMAGE CLASSIFY ──
-  function handleFileSelect(input) { if (input.files[0]) showPreview(input.files[0]); }
-  function handleDrop(e) {
+  function handleFileSelect(input){if(input.files[0]) showPreview(input.files[0]);}
+
+  function handleDrop(e){
     e.preventDefault();
-    document.getElementById('image-drop').classList.remove('drag-over');
-    const f = e.dataTransfer.files[0];
-    if (f && f.type.startsWith('image/')) showPreview(f);
+    e.currentTarget.classList.remove('drag-over');
+    const file=e.dataTransfer.files[0];
+    if(file&&file.type.startsWith('image/')) showPreview(file);
   }
-  function showPreview(file) {
-    selectedImage = file;
-    const reader = new FileReader();
-    reader.onload = ev => {
-      document.getElementById('preview-img').src = ev.target.result;
-      document.getElementById('preview-wrap').style.display = 'block';
-      document.getElementById('classify-btn').style.display = 'block';
+
+  function showPreview(file){
+    selectedImage=file;
+    const reader=new FileReader();
+    reader.onload=ev=>{
+      document.getElementById('preview-img').src=ev.target.result;
+      document.getElementById('preview-wrap').style.display='block';
+      document.getElementById('classify-btn').style.display='block';
     };
     reader.readAsDataURL(file);
   }
 
-  async function classifyImage() {
-    if (!selectedImage || !model) return;
-    const btn = document.getElementById('classify-btn');
-    btn.disabled = true;
-    setStatus('Classifying…', 'active');
-    await new Promise(r => setTimeout(r, 50));
-    const img = new Image();
-    img.onload = async () => {
-      try {
-        const canvas = document.createElement('canvas');
-        canvas.width = 224; canvas.height = 224;
-        canvas.getContext('2d').drawImage(img, 0, 0, 224, 224);
-        const predictions = await runInference(canvas);
+  async function classifyImage(){
+    if(!selectedImage||!model) return;
+    const btn=document.getElementById('classify-btn');
+    btn.disabled=true;
+    setStatus('Classifying…','active');
+    await new Promise(r=>setTimeout(r,50));
+    const img=new Image();
+    img.onload=async()=>{
+      try{
+        const canvas=document.createElement('canvas');
+        canvas.width=224; canvas.height=224;
+        canvas.getContext('2d').drawImage(img,0,0,224,224);
+        const predictions=await model.classify(canvas,5);
         renderPredictions(predictions);
-        document.getElementById('result-img').src = img.src;
+        document.getElementById('result-img').src=img.src;
         document.getElementById('result-panel').classList.add('visible');
-        setStatus('Done — ' + predictions[0].className, 'ok');
-      } catch(e) { setStatus('Error: ' + e.message, 'error'); }
-      btn.disabled = false;
+        setStatus('Done — '+predictions[0].className,'ok');
+      }catch(e){setStatus('Error: '+e.message,'error');}
+      btn.disabled=false;
     };
-    img.src = URL.createObjectURL(selectedImage);
+    img.src=URL.createObjectURL(selectedImage);
   }
-
-  const IMAGENET_CLASSES = {0:"tench",1:"goldfish",2:"great white shark",3:"tiger shark",4:"hammerhead shark",5:"electric ray",6:"stingray",7:"rooster",8:"hen",9:"ostrich",10:"brambling",11:"goldfinch",12:"house finch",13:"junco",14:"indigo bunting",15:"robin",16:"bulbul",17:"jay",18:"magpie",19:"chickadee",20:"water ouzel",21:"kite",22:"bald eagle",23:"vulture",24:"great grey owl",25:"fire salamander",26:"smooth newt",27:"newt",28:"spotted salamander",29:"axolotl",30:"bullfrog",31:"tree frog",32:"tailed frog",33:"loggerhead turtle",34:"leatherback turtle",35:"mud turtle",36:"terrapin",37:"box turtle",38:"banded gecko",39:"green iguana",40:"Carolina anole",41:"whiptail lizard",42:"agama",43:"frilled-neck lizard",44:"alligator lizard",45:"Gila monster",46:"European green lizard",47:"chameleon",48:"Komodo dragon",49:"Nile crocodile",50:"American alligator",51:"triceratops",52:"worm snake",53:"ring-necked snake",54:"hognose snake",55:"green snake",56:"king snake",57:"garter snake",58:"water snake",59:"vine snake",60:"night snake",61:"boa constrictor",62:"African rock python",63:"Indian cobra",64:"green mamba",65:"sea snake",66:"horned viper",67:"diamondback rattlesnake",68:"sidewinder rattlesnake",69:"trilobite",70:"harvestman",71:"scorpion",72:"yellow garden spider",73:"barn spider",74:"European garden spider",75:"black widow",76:"tarantula",77:"wolf spider",78:"tick",79:"centipede",80:"black grouse",81:"ptarmigan",82:"ruffed grouse",83:"prairie grouse",84:"peacock",85:"quail",86:"partridge",87:"African grey parrot",88:"macaw",89:"sulphur-crested cockatoo",90:"lorikeet",91:"coucal",92:"bee eater",93:"hornbill",94:"hummingbird",95:"jacamar",96:"toucan",97:"mallard",98:"merganser",99:"goose",100:"black swan",101:"elephant",102:"echidna",103:"platypus",104:"wallaby",105:"koala",106:"wombat",107:"jellyfish",108:"sea anemone",109:"brain coral",110:"flatworm",111:"nematode",112:"conch",113:"snail",114:"slug",115:"sea slug",116:"chiton",117:"chambered nautilus",118:"Dungeness crab",119:"rock crab",120:"fiddler crab",121:"king crab",122:"American lobster",123:"spiny lobster",124:"crayfish",125:"hermit crab",126:"isopod",127:"white stork",128:"black stork",129:"spoonbill",130:"flamingo",131:"little blue heron",132:"great egret",133:"bittern",134:"crane",135:"limpkin",136:"common gallinule",137:"American coot",138:"bustard",139:"ruddy turnstone",140:"dunlin",141:"redshank",142:"dowitcher",143:"oystercatcher",144:"pelican",145:"king penguin",146:"albatross",147:"grey whale",148:"killer whale",149:"dugong",150:"sea lion",151:"Chihuahua",152:"Japanese Chin",153:"Maltese",154:"Pekingese",155:"Shih Tzu",156:"Blenheim spaniel",157:"papillon",158:"toy terrier",159:"Rhodesian ridgeback",160:"Afghan hound",161:"basset hound",162:"beagle",163:"bloodhound",164:"bluetick coonhound",165:"black-and-tan coonhound",166:"Walker foxhound",167:"English foxhound",168:"redbone coonhound",169:"borzoi",170:"Irish wolfhound",171:"Italian greyhound",172:"whippet",173:"Ibizan hound",174:"Norwegian elkhound",175:"otterhound",176:"Saluki",177:"Scottish deerhound",178:"Weimaraner",179:"Staffordshire bull terrier",180:"American Staffordshire terrier",181:"Bedlington terrier",182:"Border terrier",183:"Kerry blue terrier",184:"Irish terrier",185:"Norfolk terrier",186:"Norwich terrier",187:"Yorkshire terrier",188:"wire fox terrier",189:"Lakeland terrier",190:"Sealyham terrier",191:"Airedale terrier",192:"cairn terrier",193:"Australian terrier",194:"Dandie Dinmont terrier",195:"Boston terrier",196:"miniature schnauzer",197:"giant schnauzer",198:"standard schnauzer",199:"Scottish terrier",200:"Tibetan terrier",201:"silky terrier",202:"soft-coated wheaten terrier",203:"West Highland white terrier",204:"Lhasa Apso",205:"flat-coated retriever",206:"curly-coated retriever",207:"golden retriever",208:"Labrador retriever",209:"Chesapeake Bay retriever",210:"German shorthaired pointer",211:"vizsla",212:"English setter",213:"Irish setter",214:"Gordon setter",215:"Brittany",216:"clumber spaniel",217:"English springer spaniel",218:"Welsh springer spaniel",219:"cocker spaniel",220:"Sussex spaniel",221:"Irish water spaniel",222:"kuvasz",223:"schipperke",224:"Groenendael",225:"Malinois",226:"briard",227:"kelpie",228:"komondor",229:"Old English sheepdog",230:"Shetland sheepdog",231:"collie",232:"Border collie",233:"Bouvier des Flandres",234:"Rottweiler",235:"German shepherd",236:"Dobermann",237:"miniature pinscher",238:"Greater Swiss Mountain dog",239:"Bernese Mountain dog",240:"Appenzeller",241:"Entlebucher",242:"boxer",243:"bull mastiff",244:"Tibetan mastiff",245:"French bulldog",246:"Great Dane",247:"St. Bernard",248:"husky",249:"Alaskan Malamute",250:"Siberian husky",251:"dalmatian",252:"affenpinscher",253:"basenji",254:"pug",255:"Leonberger",256:"Newfoundland",257:"Great Pyrenees",258:"Samoyed",259:"Pomeranian",260:"chow chow",261:"keeshond",262:"Griffon Bruxellois",263:"Pembroke Welsh corgi",264:"Cardigan Welsh corgi",265:"toy poodle",266:"miniature poodle",267:"standard poodle",268:"Mexican hairless",269:"timber wolf",270:"white wolf",271:"red wolf",272:"coyote",273:"dingo",274:"dhole",275:"African wild dog",276:"hyena",277:"red fox",278:"kit fox",279:"Arctic fox",280:"grey fox",281:"tabby cat",282:"tiger cat",283:"Persian cat",284:"Siamese cat",285:"Egyptian Mau",286:"cougar",287:"lynx",288:"leopard",289:"snow leopard",290:"jaguar",291:"lion",292:"tiger",293:"cheetah",294:"brown bear",295:"American black bear",296:"polar bear",297:"sloth bear",298:"mongoose",299:"meerkat",300:"tiger beetle",301:"ladybug",302:"ground beetle",303:"longhorn beetle",304:"leaf beetle",305:"dung beetle",306:"rhinoceros beetle",307:"weevil",308:"fly",309:"bee",310:"ant",311:"grasshopper",312:"cricket",313:"stick insect",314:"cockroach",315:"praying mantis",316:"cicada",317:"leafhopper",318:"lacewing",319:"dragonfly",320:"damselfly",321:"admiral butterfly",322:"ringlet butterfly",323:"monarch butterfly",324:"cabbage white butterfly",325:"sulphur butterfly",326:"lycaenid butterfly",327:"starfish",328:"sea urchin",329:"sea cucumber",330:"cottontail rabbit",331:"hare",332:"Angora rabbit",333:"hamster",334:"porcupine",335:"fox squirrel",336:"marmot",337:"beaver",338:"guinea pig",339:"sorrel",340:"zebra",341:"pig",342:"wild boar",343:"warthog",344:"hippopotamus",345:"ox",346:"water buffalo",347:"bison",348:"ram",349:"bighorn sheep",350:"Alpine ibex",351:"hartebeest",352:"impala",353:"gazelle",354:"dromedary",355:"llama",356:"weasel",357:"mink",358:"polecat",359:"black-footed ferret",360:"otter",361:"skunk",362:"badger",363:"armadillo",364:"three-toed sloth",365:"orangutan",366:"gorilla",367:"chimpanzee",368:"gibbon",369:"siamang",370:"guenon",371:"patas monkey",372:"baboon",373:"macaque",374:"langur",375:"colobus",376:"proboscis monkey",377:"marmoset",378:"capuchin",379:"howler monkey",380:"titi",381:"spider monkey",382:"squirrel monkey",383:"ring-tailed lemur",384:"indri",385:"Asian elephant",386:"African bush elephant",387:"red panda",388:"giant panda",389:"barracouta",390:"eel",391:"coho salmon",392:"rock beauty fish",393:"clownfish",394:"sturgeon",395:"gar",396:"lionfish",397:"pufferfish",398:"abacus",399:"abaya",400:"academic gown",401:"accordion",402:"acoustic guitar",403:"aircraft carrier",404:"airliner",405:"airship",406:"altar",407:"ambulance",408:"amphibious vehicle",409:"analog clock",410:"apiary",411:"apron",412:"trash can",413:"assault rifle",414:"backpack",415:"bakery",416:"balance beam",417:"balloon",418:"ballpoint pen",419:"Band-Aid",420:"banjo",421:"bannister",422:"barbell",423:"barber chair",424:"barbershop",425:"barn",426:"barometer",427:"barrel",428:"wheelbarrow",429:"baseball",430:"basketball",431:"bassinet",432:"bassoon",433:"swimming cap",434:"bath towel",435:"bathtub",436:"station wagon",437:"lighthouse",438:"beaker",439:"military hat",440:"beer bottle",441:"beer glass",442:"bell tower",443:"bib",444:"tandem bicycle",445:"bikini",446:"binder",447:"binoculars",448:"birdhouse",449:"boathouse",450:"bobsled",451:"bolo tie",452:"bonnet",453:"bookcase",454:"bookshop",455:"bottle cap",456:"bow",457:"bow tie",458:"brass plaque",459:"bra",460:"breakwater",461:"breastplate",462:"broom",463:"bucket",464:"buckle",465:"bulletproof vest",466:"bullet train",467:"butcher shop",468:"taxi",469:"cauldron",470:"candle",471:"cannon",472:"canoe",473:"can opener",474:"cardigan",475:"car mirror",476:"carousel",477:"tool kit",478:"carton",479:"car wheel",480:"ATM",481:"cassette",482:"cassette player",483:"castle",484:"catamaran",485:"CD player",486:"cello",487:"mobile phone",488:"chain",489:"chain-link fence",490:"chain mail",491:"chainsaw",492:"chest",493:"chiffonier",494:"chime",495:"china cabinet",496:"Christmas stocking",497:"church",498:"movie theater",499:"cleaver",500:"cliff dwelling",501:"cloak",502:"clog",503:"cocktail shaker",504:"coffee mug",505:"coffeepot",506:"coil",507:"combination lock",508:"keyboard",509:"candy store",510:"container ship",511:"convertible",512:"corkscrew",513:"cornet",514:"cowboy boot",515:"cowboy hat",516:"cradle",517:"crane",518:"crash helmet",519:"crate",520:"crib",521:"Crock Pot",522:"croquet ball",523:"crutch",524:"cuirass",525:"dam",526:"desk",527:"desktop computer",528:"dial telephone",529:"diaper",530:"digital clock",531:"digital watch",532:"dining table",533:"dishcloth",534:"dishwasher",535:"disc brake",536:"dock",537:"dog sled",538:"dome",539:"doormat",540:"drilling platform",541:"drum",542:"drumstick",543:"dumbbell",544:"Dutch oven",545:"electric fan",546:"electric guitar",547:"electric locomotive",548:"entertainment center",549:"envelope",550:"espresso maker",551:"face powder",552:"feather boa",553:"filing cabinet",554:"fireboat",555:"fire truck",556:"fire screen",557:"flagpole",558:"flute",559:"folding chair",560:"football helmet",561:"forklift",562:"fountain",563:"fountain pen",564:"four-poster bed",565:"freight car",566:"French horn",567:"frying pan",568:"fur coat",569:"garbage truck",570:"gas mask",571:"gas pump",572:"goblet",573:"go-kart",574:"golf ball",575:"golf cart",576:"gondola",577:"gong",578:"gown",579:"grand piano",580:"greenhouse",581:"radiator grille",582:"grocery store",583:"guillotine",584:"hair clip",585:"hair spray",586:"half-track",587:"hammer",588:"hamper",589:"hair dryer",590:"handheld computer",591:"handkerchief",592:"hard disk",593:"harmonica",594:"harp",595:"harvester",596:"hatchet",597:"holster",598:"home theater",599:"honeycomb",600:"hook",601:"hoopskirt",602:"horizontal bar",603:"horse cart",604:"hourglass",605:"iPod",606:"iron",607:"jack-o-lantern",608:"jeans",609:"jeep",610:"T-shirt",611:"jigsaw puzzle",612:"rickshaw",613:"joystick",614:"kimono",615:"knee pad",616:"knot",617:"lab coat",618:"ladle",619:"lampshade",620:"laptop",621:"lawn mower",622:"lens cap",623:"letter opener",624:"library",625:"lifeboat",626:"lighter",627:"limousine",628:"ocean liner",629:"lipstick",630:"loafer",631:"lotion",632:"loudspeaker",633:"loupe",634:"sawmill",635:"compass",636:"mailbag",637:"mailbox",638:"maillot",639:"tank suit",640:"manhole cover",641:"maraca",642:"marimba",643:"mask",644:"matchstick",645:"maypole",646:"maze",647:"measuring cup",648:"medicine cabinet",649:"megalith",650:"microphone",651:"microwave",652:"military uniform",653:"milk can",654:"minibus",655:"miniskirt",656:"minivan",657:"missile",658:"mitten",659:"mixing bowl",660:"mobile home",661:"Model T",662:"modem",663:"monastery",664:"monitor",665:"moped",666:"mortar",667:"mortarboard",668:"mosque",669:"mosquito net",670:"motor scooter",671:"mountain bike",672:"mountain tent",673:"computer mouse",674:"mousetrap",675:"moving van",676:"muzzle",677:"nail",678:"neck brace",679:"necklace",680:"nipple",681:"laptop",682:"obelisk",683:"oboe",684:"ocarina",685:"odometer",686:"oil filter",687:"organ",688:"oscilloscope",689:"overskirt",690:"ox cart",691:"oxygen mask",692:"packet",693:"paddle",694:"paddle wheel",695:"padlock",696:"paintbrush",697:"pajamas",698:"palace",699:"pan flute",700:"paper towel",701:"parachute",702:"parallel bars",703:"park bench",704:"parking meter",705:"passenger car",706:"patio",707:"pay phone",708:"pedestal",709:"pencil box",710:"pencil sharpener",711:"perfume",712:"Petri dish",713:"photocopier",714:"plectrum",715:"pickelhaube",716:"picket fence",717:"pickup truck",718:"pier",719:"piggy bank",720:"pill bottle",721:"pillow",722:"ping-pong ball",723:"pinwheel",724:"pirate ship",725:"pitcher",726:"plane",727:"planetarium",728:"plastic bag",729:"plate rack",730:"plow",731:"plunger",732:"Polaroid camera",733:"pole",734:"police van",735:"poncho",736:"pool table",737:"soda bottle",738:"flowerpot",739:"potter's wheel",740:"power drill",741:"prayer rug",742:"printer",743:"prison",744:"projectile",745:"projector",746:"hockey puck",747:"punching bag",748:"purse",749:"quill pen",750:"quilt",751:"race car",752:"racket",753:"radiator",754:"radio",755:"radio telescope",756:"rain barrel",757:"RV",758:"reel",759:"reflex camera",760:"refrigerator",761:"remote control",762:"restaurant",763:"revolver",764:"rifle",765:"rocking chair",766:"rotisserie",767:"rubber eraser",768:"rugby ball",769:"ruler",770:"running shoe",771:"safe",772:"safety pin",773:"salt shaker",774:"sandal",775:"sarong",776:"saxophone",777:"scabbard",778:"scale",779:"school bus",780:"schooner",781:"scoreboard",782:"CRT screen",783:"screw",784:"screwdriver",785:"seat belt",786:"sewing machine",787:"shield",788:"shoe shop",789:"shoji",790:"shopping basket",791:"shopping cart",792:"shovel",793:"shower cap",794:"shower curtain",795:"ski",796:"ski mask",797:"sleeping bag",798:"slide rule",799:"sliding door",800:"slot machine",801:"snorkel",802:"snowmobile",803:"snowplow",804:"soap dispenser",805:"soccer ball",806:"sock",807:"solar dish",808:"sombrero",809:"soup bowl",810:"space bar",811:"space heater",812:"space shuttle",813:"spatula",814:"speedboat",815:"spider web",816:"spindle",817:"sports car",818:"spotlight",819:"stage",820:"steam locomotive",821:"steel arch bridge",822:"steel drum",823:"stethoscope",824:"stole",825:"stone wall",826:"stopwatch",827:"stove",828:"strainer",829:"streetcar",830:"stretcher",831:"studio couch",832:"stupa",833:"submarine",834:"suit",835:"sundial",836:"monocle",837:"sunglasses",838:"sunscreen",839:"suspension bridge",840:"mop",841:"sweatshirt",842:"swimming trunks",843:"swing",844:"switch",845:"syringe",846:"table lamp",847:"tank",848:"tape player",849:"teapot",850:"teddy bear",851:"television",852:"tennis ball",853:"thatched roof",854:"theater curtain",855:"thimble",856:"threshing machine",857:"throne",858:"tile roof",859:"toaster",860:"tobacco shop",861:"toilet seat",862:"torch",863:"totem pole",864:"tow truck",865:"toy shop",866:"tractor",867:"semi-truck",868:"tray",869:"trench coat",870:"tricycle",871:"trimaran",872:"tripod",873:"triumphal arch",874:"trolleybus",875:"trombone",876:"tub",877:"turnstile",878:"typewriter keyboard",879:"umbrella",880:"unicycle",881:"upright piano",882:"vacuum cleaner",883:"vase",884:"vault",885:"velvet",886:"vending machine",887:"vestment",888:"viaduct",889:"violin",890:"volleyball",891:"waffle iron",892:"wall clock",893:"wallet",894:"wardrobe",895:"warplane",896:"washbasin",897:"washing machine",898:"water bottle",899:"water jug",900:"water tower",901:"whiskey jug",902:"whistle",903:"wig",904:"window screen",905:"window shade",906:"Windsor tie",907:"wine bottle",908:"wing",909:"wok",910:"wooden spoon",911:"wool",912:"worm fence",913:"wreck",914:"yawl",915:"yurt",916:"website",917:"comic book",918:"crossword puzzle",919:"street sign",920:"traffic light",921:"book jacket",922:"menu",923:"plate",924:"guacamole",925:"consomme",926:"hot pot",927:"trifle",928:"ice cream",929:"ice pop",930:"French loaf",931:"bagel",932:"pretzel",933:"cheeseburger",934:"hot dog",935:"mashed potato",936:"cabbage",937:"broccoli",938:"cauliflower",939:"zucchini",940:"spaghetti squash",941:"acorn squash",942:"butternut squash",943:"cucumber",944:"artichoke",945:"bell pepper",946:"cardoon",947:"mushroom",948:"Granny Smith apple",949:"strawberry",950:"orange",951:"lemon",952:"fig",953:"pineapple",954:"banana",955:"jackfruit",956:"custard apple",957:"pomegranate",958:"hay",959:"carbonara",960:"chocolate sauce",961:"dough",962:"meatloaf",963:"pizza",964:"potpie",965:"burrito",966:"red wine",967:"espresso",968:"cup",969:"eggnog",970:"alp",971:"bubble",972:"cliff",973:"coral reef",974:"geyser",975:"lakeside",976:"promontory",977:"sandbar",978:"seashore",979:"valley",980:"volcano",981:"baseball player",982:"bridegroom",983:"scuba diver",984:"rapeseed",985:"daisy",986:"yellow lady's slipper",987:"corn",988:"acorn",989:"rose hip",990:"horse chestnut",991:"coral fungus",992:"agaric",993:"gyromitra",994:"stinkhorn",995:"earthstar",996:"hen-of-the-woods",997:"bolete",998:"ear of corn",999:"toilet paper"};
 </script>
 </body>
 </html>
