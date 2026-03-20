@@ -285,6 +285,8 @@ select#cam-select:focus { border-color: var(--accent); }
 .det-conf  { font-family:var(--mono); font-size:11px; color:var(--accent); flex-shrink:0; }
 
 footer { text-align:center; font-size:11px; color:var(--muted); font-family:var(--mono); margin-top:8px; }
+footer a { color: var(--accent); text-decoration: none; }
+footer a:hover { text-decoration: underline; }
 </style>
 </head>
 <body>
@@ -417,7 +419,12 @@ footer { text-align:center; font-size:11px; color:var(--muted); font-family:var(
     <div class="det-grid" id="det-grid"></div>
   </div>
 
-  <footer>YOLOv8 · ONNX Runtime Web · runs entirely in your browser</footer>
+  <footer>
+    YOLOv8 · ONNX Runtime Web · runs entirely in your browser
+    <br>
+    Download the model <a href="https://minh6079.github.io/tm-model-run/yolov8n/yolov8n.onnx" target="_blank">here</a>.
+    If you want v11 instead of 8, click <a href="https://minh6079.github.io/tm-model-run/yolov8n/yolov11n.onnx" target="_blank">here</a>.
+  </footer>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/onnxruntime-web@1.18.0/dist/ort.min.js"></script>
