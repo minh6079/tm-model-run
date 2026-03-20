@@ -51,7 +51,7 @@ body::before {
   position: relative;
   z-index: 1;
   width: 100%;
-  max-width: 620px;
+  max-width: 640px;
   display: flex;
   flex-direction: column;
   gap: 16px;
@@ -75,7 +75,7 @@ header { text-align: center; margin-bottom: 8px; }
 
 h1 {
   font-family: var(--mono);
-  font-size: clamp(24px, 5vw, 34px);
+  font-size: clamp(22px, 5vw, 32px);
   font-weight: 700;
   letter-spacing: -0.02em;
   line-height: 1.15;
@@ -87,7 +87,7 @@ h1 span { color: var(--accent); }
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: 12px;
-  padding: 22px;
+  padding: 20px;
 }
 
 .panel-title {
@@ -99,24 +99,21 @@ h1 span { color: var(--accent); }
   margin-bottom: 14px;
 }
 
-/* ── drop zones ── */
+/* ── drop zone ── */
 .drop-zone {
   border: 1.5px dashed var(--border);
   border-radius: 10px;
-  padding: 32px 20px;
+  padding: 28px 20px;
   text-align: center;
   cursor: pointer;
   transition: all 0.2s;
   background: var(--bg);
   user-select: none;
-  /* Important: allow touch events to work */
   -webkit-user-select: none;
   touch-action: manipulation;
   position: relative;
   overflow: hidden;
 }
-
-/* Hidden native file input overlaid on drop zone for maximum mobile compat */
 .drop-zone input[type="file"] {
   position: absolute;
   inset: 0;
@@ -125,210 +122,188 @@ h1 span { color: var(--accent); }
   opacity: 0;
   cursor: pointer;
   font-size: 0;
-  /* On iOS, a zero-size input won't open the picker — keep it full-size but invisible */
 }
+.drop-zone:hover     { border-color: var(--accent3); background: rgba(255,217,124,0.03); }
+.drop-zone.drag-over { border-color: var(--accent3); background: rgba(255,217,124,0.06); }
+.drop-zone.loaded    { border-color: var(--accent); border-style: solid; background: rgba(124,255,212,0.03); }
+.drop-icon    { font-size: 26px; margin-bottom: 8px; pointer-events: none; }
+.drop-primary { font-family: var(--mono); font-size: 12px; color: var(--accent3); font-weight: 700; pointer-events: none; }
+.drop-sub     { font-family: var(--mono); font-size: 10px; color: var(--muted); margin-top: 4px; pointer-events: none; }
 
-.drop-zone:hover { border-color: var(--accent3); background: rgba(255,217,124,0.03); }
-.drop-zone.drag-over { border-color: var(--accent3); background: rgba(255,217,124,0.05); }
-.drop-zone.loaded { border-color: var(--accent); border-style: solid; background: rgba(124,255,212,0.03); }
-
-.drop-icon { font-size: 28px; margin-bottom: 8px; pointer-events: none; }
-
-.drop-primary {
+/* ── tabs ── */
+.tabs {
+  display: flex;
+  gap: 2px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 4px;
+}
+.tab {
+  flex: 1;
   font-family: var(--mono);
-  font-size: 12px;
-  color: var(--accent3);
+  font-size: 11px;
   font-weight: 700;
-  pointer-events: none;
-}
-
-.drop-sub {
-  font-family: var(--mono);
-  font-size: 10px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  border: none;
+  border-radius: 7px;
+  padding: 10px 8px;
+  cursor: pointer;
+  transition: all 0.18s;
+  background: transparent;
   color: var(--muted);
-  margin-top: 4px;
-  pointer-events: none;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
 }
+.tab.active { background: var(--surface); color: var(--accent); border: 1px solid var(--border); }
+.tab:not(.active):hover { color: var(--text); }
 
-/* Mobile hint */
-.drop-mobile-hint {
-  display: none;
-  font-family: var(--mono);
-  font-size: 9px;
-  color: var(--muted);
-  margin-top: 6px;
-  opacity: 0.6;
-  pointer-events: none;
+/* ── sliders ── */
+.settings-row { display: flex; gap: 14px; margin-top: 14px; flex-wrap: wrap; }
+.setting-item {
+  display: flex; align-items: center; gap: 8px;
+  font-family: var(--mono); font-size: 11px; color: var(--muted);
+  flex: 1; min-width: 130px;
 }
+input[type="range"] {
+  -webkit-appearance: none; flex: 1; height: 3px;
+  background: var(--border); border-radius: 2px;
+  outline: none; cursor: pointer; touch-action: none;
+}
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none; width: 20px; height: 20px;
+  border-radius: 50%; background: var(--accent); cursor: pointer;
+}
+input[type="range"]::-moz-range-thumb {
+  width: 20px; height: 20px; border-radius: 50%;
+  background: var(--accent); border: none;
+}
+.setting-val { color: var(--accent); min-width: 36px; text-align: right; }
 
-@media (hover: none) {
-  .drop-mobile-hint { display: block; }
+/* ── buttons ── */
+.btn {
+  font-family: var(--mono); font-size: 13px; font-weight: 700;
+  letter-spacing: 0.05em; border: none; border-radius: 8px;
+  padding: 14px 16px; cursor: pointer; transition: all 0.2s;
+  touch-action: manipulation; -webkit-tap-highlight-color: transparent;
+}
+.btn-block { width: 100%; margin-top: 14px; display: block; }
+.btn-primary { background: var(--accent); color: #0a0a0f; }
+.btn-primary:hover  { box-shadow: var(--glow); transform: translateY(-1px); }
+.btn-primary:active { transform: translateY(0); opacity: 0.85; }
+.btn-primary:disabled { opacity: 0.3; cursor: not-allowed; transform: none; box-shadow: none; }
+.btn-danger  { background: var(--accent2); color: #0a0a0f; }
+.btn-danger:hover  { box-shadow: 0 0 24px rgba(255,107,107,0.25); transform: translateY(-1px); }
+.btn-danger:active { transform: translateY(0); }
+.btn-outline { background: transparent; color: var(--muted); border: 1px solid var(--border); }
+.btn-outline:hover { border-color: var(--accent3); color: var(--accent3); }
+
+.btn-row { display: flex; gap: 10px; margin-top: 14px; }
+.btn-row .btn { flex: 1; }
+
+/* ── status ── */
+.status {
+  display: flex; align-items: center; gap: 8px;
+  margin-top: 12px; font-size: 12px; color: var(--muted);
+  font-family: var(--mono); min-height: 20px; flex-wrap: wrap;
+}
+.dot { width: 7px; height: 7px; border-radius: 50%; background: var(--muted); flex-shrink: 0; }
+.dot.active { background: var(--accent); animation: pulse 1.2s ease-in-out infinite; }
+.dot.ok     { background: var(--accent); }
+.dot.error  { background: var(--accent2); }
+.dot.live   { background: var(--accent2); animation: livepulse 0.9s ease-in-out infinite; }
+
+@keyframes pulse {
+  0%,100% { opacity:1; box-shadow: 0 0 0 0 rgba(124,255,212,0.4); }
+  50%      { opacity:.6; box-shadow: 0 0 0 5px rgba(124,255,212,0); }
+}
+@keyframes livepulse {
+  0%,100% { opacity:1; box-shadow: 0 0 0 0 rgba(255,107,107,0.4); }
+  50%      { opacity:.5; box-shadow: 0 0 0 5px rgba(255,107,107,0); }
 }
 
 /* ── image preview ── */
 #img-preview-wrap { display: none; margin-top: 14px; text-align: center; }
-#img-preview {
-  max-width: 100%;
-  max-height: 260px;
-  border-radius: 8px;
-  border: 1px solid var(--border);
-  display: block;
-  margin: 0 auto;
-}
+#img-preview { max-width:100%; max-height:240px; border-radius:8px; border:1px solid var(--border); display:block; margin:0 auto; }
 
-/* ── sliders ── */
-.settings-row {
-  display: flex;
-  gap: 16px;
+/* ── webcam view ── */
+#webcam-view {
+  position: relative; border-radius: 10px; overflow: hidden;
+  background: #000; aspect-ratio: 4/3;
+  display: flex; align-items: center; justify-content: center;
   margin-top: 14px;
-  flex-wrap: wrap;
 }
+#webcam-video  { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; display:none; }
+#webcam-canvas { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; display:none; }
 
-.setting-item {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-family: var(--mono);
-  font-size: 11px;
-  color: var(--muted);
-  flex: 1;
-  min-width: 140px;
+#webcam-placeholder {
+  color: var(--muted); font-family: var(--mono); font-size: 12px;
+  text-align: center; padding: 24px; display: flex;
+  flex-direction: column; align-items: center; gap: 10px;
 }
+.cam-icon { font-size: 40px; }
 
-input[type="range"] {
-  -webkit-appearance: none;
-  flex: 1;
-  height: 3px;
-  background: var(--border);
-  border-radius: 2px;
-  outline: none;
-  cursor: pointer;
-  touch-action: none;
+/* overlay badges */
+#cam-overlay {
+  position: absolute; top: 10px; left: 10px;
+  display: none; flex-direction: column; gap: 6px; pointer-events: none;
 }
-
-input[type="range"]::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  width: 20px; height: 20px;
-  border-radius: 50%;
-  background: var(--accent);
-  cursor: pointer;
+.cam-badge {
+  font-family: var(--mono); font-size: 10px; font-weight: 700;
+  padding: 3px 9px; border-radius: 4px; letter-spacing: 0.06em;
+  backdrop-filter: blur(6px);
 }
+.badge-live  { background: rgba(255,107,107,0.2); color: var(--accent2); border: 1px solid rgba(255,107,107,0.35); }
+.badge-fps   { background: rgba(10,10,15,0.8); color: var(--accent); border: 1px solid rgba(124,255,212,0.2); }
+.badge-count { background: rgba(10,10,15,0.8); color: var(--accent3); border: 1px solid rgba(255,217,124,0.2); }
 
-input[type="range"]::-moz-range-thumb {
-  width: 20px; height: 20px;
-  border-radius: 50%;
-  background: var(--accent);
-  cursor: pointer;
-  border: none;
+/* camera selector */
+.cam-select-wrap { margin-top: 12px; display: none; }
+select#cam-select {
+  width: 100%; background: var(--bg); color: var(--text);
+  border: 1px solid var(--border); border-radius: 8px;
+  padding: 9px 12px; font-family: var(--mono); font-size: 11px;
+  outline: none; cursor: pointer; -webkit-appearance: none;
 }
+select#cam-select:focus { border-color: var(--accent); }
 
-.setting-val { color: var(--accent); min-width: 36px; text-align: right; }
-
-/* ── button ── */
-.btn {
-  font-family: var(--mono);
-  font-size: 13px;
-  font-weight: 700;
-  letter-spacing: 0.05em;
-  border: none;
-  border-radius: 8px;
-  padding: 15px 22px;
-  cursor: pointer;
-  transition: all 0.2s;
-  width: 100%;
-  margin-top: 14px;
-  touch-action: manipulation;
-  -webkit-tap-highlight-color: transparent;
-}
-
-.btn-primary { background: var(--accent); color: #0a0a0f; }
-.btn-primary:hover { box-shadow: var(--glow); transform: translateY(-1px); }
-.btn-primary:active { transform: translateY(0); opacity: 0.85; }
-.btn-primary:disabled { opacity: 0.3; cursor: not-allowed; transform: none; box-shadow: none; }
-
-/* ── status ── */
-.status {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin-top: 12px;
-  font-size: 12px;
-  color: var(--muted);
-  font-family: var(--mono);
-  min-height: 20px;
-}
-
-.dot { width: 7px; height: 7px; border-radius: 50%; background: var(--muted); flex-shrink: 0; }
-.dot.active { background: var(--accent); animation: pulse 1.4s ease-in-out infinite; }
-.dot.ok     { background: var(--accent); }
-.dot.error  { background: var(--accent2); }
-
-@keyframes pulse {
-  0%,100% { opacity:1; box-shadow: 0 0 0 0 rgba(124,255,212,0.4); }
-  50%      { opacity:.7; box-shadow: 0 0 0 5px rgba(124,255,212,0); }
-}
-
-/* ── output ── */
+/* ── image output ── */
 #canvas-wrap {
-  display: none;
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  padding: 22px;
-  overflow-x: auto;
+  display: none; background: var(--surface);
+  border: 1px solid var(--border); border-radius: 12px;
+  padding: 20px; overflow-x: auto;
 }
+#output-canvas { max-width:100%; border-radius:8px; display:block; margin:0 auto; }
 
-#output-canvas { max-width: 100%; border-radius: 8px; display: block; margin: 0 auto; }
-
+/* detections list */
 #detections-panel { display: none; }
+.det-header { font-family:var(--mono); font-size:10px; letter-spacing:0.14em; text-transform:uppercase; color:var(--muted); margin-bottom:12px; }
+.det-grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(130px,1fr)); gap:8px; }
+.det-chip { background:var(--bg); border:1px solid var(--border); border-radius:8px; padding:9px 12px; display:flex; align-items:center; justify-content:space-between; gap:8px; }
+.det-label { font-family:var(--mono); font-size:11px; text-transform:capitalize; }
+.det-conf  { font-family:var(--mono); font-size:11px; color:var(--accent); flex-shrink:0; }
 
-.det-header {
-  font-family: var(--mono);
-  font-size: 10px;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--muted);
-  margin-bottom: 12px;
-}
-
-.det-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px,1fr)); gap: 8px; }
-
-.det-chip {
-  background: var(--bg);
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  padding: 9px 13px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 8px;
-}
-
-.det-label { font-family: var(--mono); font-size: 11px; text-transform: capitalize; }
-.det-conf  { font-family: var(--mono); font-size: 11px; color: var(--accent); flex-shrink: 0; }
-
-footer { text-align: center; font-size: 11px; color: var(--muted); font-family: var(--mono); margin-top: 8px; }
+footer { text-align:center; font-size:11px; color:var(--muted); font-family:var(--mono); margin-top:8px; }
 </style>
 </head>
 <body>
 <div class="container">
 
   <header>
-    <div class="tag">ONNX · YOLOv8 · Detection</div>
+    <div class="tag">ONNX · YOLOv8 · Real-time Detection</div>
     <h1>Object<br/><span>Detector</span></h1>
-    <p class="subtitle">Load YOLOv8n.onnx · drop an image · get annotated results</p>
+    <p class="subtitle">Load YOLOv8n.onnx · image or live webcam · runs in browser</p>
   </header>
 
-  <!-- Step 1 -->
+  <!-- Step 1: Model -->
   <div class="panel">
     <div class="panel-title">① Load yolov8n.onnx</div>
     <div class="drop-zone" id="model-drop">
-      <!-- Native file input for full mobile support -->
-      <input type="file" id="model-file-input" accept=".onnx" tabindex="-1"/>
+      <input type="file" id="model-file-input" accept=".onnx"/>
       <div class="drop-icon">⚖️</div>
       <div class="drop-primary" id="model-primary">Drop yolov8n.onnx here or tap</div>
       <div class="drop-sub" id="model-sub">~12 MB · exported from Ultralytics</div>
-      <div class="drop-mobile-hint">↑ tap to browse files</div>
     </div>
     <div class="status">
       <span class="dot" id="model-dot"></span>
@@ -336,46 +311,102 @@ footer { text-align: center; font-size: 11px; color: var(--muted); font-family: 
     </div>
   </div>
 
-  <!-- Step 2 -->
-  <div class="panel" id="image-panel" style="display:none">
-    <div class="panel-title">② Drop an image</div>
-    <div class="drop-zone" id="img-drop">
-      <!-- Native file input for full mobile support -->
-      <input type="file" id="img-file-input" accept="image/*" tabindex="-1"/>
-      <div class="drop-icon">🖼️</div>
-      <div class="drop-primary" id="img-primary">Drop image here or tap</div>
-      <div class="drop-sub" id="img-sub">jpg · png · webp</div>
-      <div class="drop-mobile-hint">↑ tap to pick from gallery or camera</div>
+  <!-- Step 2: Input (tabbed) -->
+  <div class="panel" id="input-panel" style="display:none">
+    <div class="panel-title">② Choose input</div>
+
+    <div class="tabs">
+      <button class="tab active" id="tab-image"  onclick="switchTab('image')">🖼 Image</button>
+      <button class="tab"        id="tab-webcam" onclick="switchTab('webcam')">📷 Webcam</button>
     </div>
 
-    <div id="img-preview-wrap">
-      <img id="img-preview" src="" alt="preview"/>
-    </div>
-
-    <div class="settings-row">
-      <div class="setting-item">
-        Conf
-        <input type="range" id="conf-thresh" min="10" max="95" value="35"
-          oninput="document.getElementById('conf-val').textContent = this.value + '%'"/>
-        <span class="setting-val" id="conf-val">35%</span>
+    <!-- IMAGE PANE -->
+    <div id="pane-image">
+      <div style="margin-top:14px">
+        <div class="drop-zone" id="img-drop">
+          <input type="file" id="img-file-input" accept="image/*"/>
+          <div class="drop-icon">🖼️</div>
+          <div class="drop-primary" id="img-primary">Drop image here or tap</div>
+          <div class="drop-sub"    id="img-sub">jpg · png · webp</div>
+        </div>
+        <div id="img-preview-wrap">
+          <img id="img-preview" src="" alt="preview"/>
+        </div>
       </div>
-      <div class="setting-item">
-        IoU
-        <input type="range" id="iou-thresh" min="10" max="90" value="45"
-          oninput="document.getElementById('iou-val').textContent = this.value + '%'"/>
-        <span class="setting-val" id="iou-val">45%</span>
+
+      <div class="settings-row">
+        <div class="setting-item">
+          Conf
+          <input type="range" id="conf-thresh" min="10" max="95" value="35"
+            oninput="document.getElementById('conf-val').textContent=this.value+'%'"/>
+          <span class="setting-val" id="conf-val">35%</span>
+        </div>
+        <div class="setting-item">
+          IoU
+          <input type="range" id="iou-thresh" min="10" max="90" value="45"
+            oninput="document.getElementById('iou-val').textContent=this.value+'%'"/>
+          <span class="setting-val" id="iou-val">45%</span>
+        </div>
+      </div>
+
+      <button class="btn btn-primary btn-block" id="detect-btn" disabled>Detect Objects</button>
+
+      <div class="status">
+        <span class="dot" id="detect-dot"></span>
+        <span id="detect-status">Drop an image to continue</span>
       </div>
     </div>
 
-    <button class="btn btn-primary" id="detect-btn" disabled>Detect Objects</button>
+    <!-- WEBCAM PANE -->
+    <div id="pane-webcam" style="display:none">
 
-    <div class="status">
-      <span class="dot" id="detect-dot"></span>
-      <span id="detect-status">Drop an image to continue</span>
+      <div id="webcam-view">
+        <div id="webcam-placeholder">
+          <div class="cam-icon">📷</div>
+          <div>Tap Start Camera to begin live detection</div>
+        </div>
+        <video id="webcam-video" autoplay playsinline muted></video>
+        <canvas id="webcam-canvas"></canvas>
+        <div id="cam-overlay">
+          <div class="cam-badge badge-live">● LIVE</div>
+          <div class="cam-badge badge-fps"   id="fps-badge">-- FPS</div>
+          <div class="cam-badge badge-count" id="count-badge">0 objects</div>
+        </div>
+      </div>
+
+      <div class="cam-select-wrap" id="cam-select-wrap">
+        <select id="cam-select"></select>
+      </div>
+
+      <div class="settings-row">
+        <div class="setting-item">
+          Conf
+          <input type="range" id="cam-conf" min="10" max="95" value="35"
+            oninput="document.getElementById('cam-conf-val').textContent=this.value+'%'"/>
+          <span class="setting-val" id="cam-conf-val">35%</span>
+        </div>
+        <div class="setting-item">
+          IoU
+          <input type="range" id="cam-iou" min="10" max="90" value="45"
+            oninput="document.getElementById('cam-iou-val').textContent=this.value+'%'"/>
+          <span class="setting-val" id="cam-iou-val">45%</span>
+        </div>
+      </div>
+
+      <div class="btn-row" style="margin-top:14px">
+        <button class="btn btn-primary" id="cam-start-btn" onclick="startCamera()">Start Camera</button>
+        <button class="btn btn-outline" id="cam-flip-btn"  onclick="flipCamera()" style="display:none">Flip</button>
+        <button class="btn btn-danger"  id="cam-stop-btn"  onclick="stopCamera()" style="display:none">Stop</button>
+      </div>
+
+      <div class="status">
+        <span class="dot" id="cam-dot"></span>
+        <span id="cam-status">Camera not started</span>
+      </div>
     </div>
   </div>
 
-  <!-- Output -->
+  <!-- Image mode output -->
   <div id="canvas-wrap">
     <div class="panel-title">③ Annotated Result</div>
     <canvas id="output-canvas"></canvas>
@@ -391,6 +422,7 @@ footer { text-align: center; font-size: 11px; color: var(--muted); font-family: 
 
 <script src="https://cdn.jsdelivr.net/npm/onnxruntime-web@1.18.0/dist/ort.min.js"></script>
 <script>
+// ── COCO classes ──
 const CLASSES = [
   'person','bicycle','car','motorcycle','airplane','bus','train','truck','boat',
   'traffic light','fire hydrant','stop sign','parking meter','bench','bird','cat',
@@ -403,57 +435,67 @@ const CLASSES = [
   'remote','keyboard','cell phone','microwave','oven','toaster','sink',
   'refrigerator','book','clock','vase','scissors','teddy bear','hair drier','toothbrush'
 ];
-
 const PALETTE = ['#7cffd4','#ff6b6b','#ffd97c','#7cb8ff','#d97cff','#ff9f7c','#7cffe8','#ffb37c','#a8ff7c','#7c8fff'];
 const classColor = id => PALETTE[id % PALETTE.length];
 
-let session = null;
+// ── State ──
+let session    = null;
 let imgElement = null;
+let camStream  = null;
+let camRunning = false;
+let camAnimId  = null;
+let facingMode = 'environment';
+let camDevices = [];
+let inferBusy  = false;
+let lastFpsTs  = 0, fpsFrames = 0;
 
 const $ = id => document.getElementById(id);
 
-const setStatus = (id, dotId, msg, state) => {
+// ── Tabs ──
+function switchTab(tab) {
+  $('tab-image' ).classList.toggle('active', tab === 'image');
+  $('tab-webcam').classList.toggle('active', tab === 'webcam');
+  $('pane-image' ).style.display = tab === 'image'  ? 'block' : 'none';
+  $('pane-webcam').style.display = tab === 'webcam' ? 'block' : 'none';
+  if (tab === 'webcam') {
+    $('canvas-wrap').style.display = 'none';
+    $('detections-panel').style.display = 'none';
+  }
+}
+
+// ── Helpers ──
+function setStatus(id, dotId, msg, state) {
   $(id).textContent = msg;
   $(dotId).className = 'dot' + (state ? ' ' + state : '');
-};
+}
 
-// ── Drop zone setup ──
-// Uses native <input type="file"> inside the zone for mobile,
-// PLUS drag-and-drop events for desktop.
-const setupDrop = (zoneId, inputId, onFile) => {
-  const zone  = $(zoneId);
-  const input = $(inputId);
-
-  // Native input change (works on ALL devices including iOS)
-  input.addEventListener('change', () => {
-    const file = input.files[0];
-    if (file) onFile(file);
-    input.value = ''; // reset so same file can be re-picked
+// ── Drop zones ──
+function setupDrop(zoneId, inputId, onFile) {
+  var zone  = $(zoneId);
+  var input = $(inputId);
+  input.addEventListener('change', function() {
+    var f = input.files[0];
+    if (f) onFile(f);
+    input.value = '';
   });
-
-  // Prevent the zone click from double-triggering (input already handles it)
-  zone.addEventListener('click', e => {
-    // Only open picker if click wasn't on the input itself
+  zone.addEventListener('click', function(e) {
     if (e.target !== input) input.click();
   });
-
-  // Drag-and-drop (desktop)
-  zone.addEventListener('dragenter', e => { e.preventDefault(); zone.classList.add('drag-over'); });
-  zone.addEventListener('dragover',  e => { e.preventDefault(); zone.classList.add('drag-over'); });
-  zone.addEventListener('dragleave', e => {
-    // Only remove if leaving the zone itself, not a child
+  zone.addEventListener('dragenter', function(e) { e.preventDefault(); zone.classList.add('drag-over'); });
+  zone.addEventListener('dragover',  function(e) { e.preventDefault(); zone.classList.add('drag-over'); });
+  zone.addEventListener('dragleave', function(e) {
     if (!zone.contains(e.relatedTarget)) zone.classList.remove('drag-over');
   });
-  zone.addEventListener('drop', e => {
+  zone.addEventListener('drop', function(e) {
     e.preventDefault();
     zone.classList.remove('drag-over');
-    const files = e.dataTransfer.files;
+    var files = e.dataTransfer.files;
     if (files && files.length > 0) onFile(files[0]);
   });
-};
+}
 
-// ── Model loading ──
-const loadModel = async (file) => {
+// ── Model ──
+async function loadModel(file) {
   if (!file.name.toLowerCase().endsWith('.onnx')) {
     setStatus('model-status', 'model-dot', 'Please select an .onnx file', 'error');
     return;
@@ -462,9 +504,8 @@ const loadModel = async (file) => {
   $('model-drop').classList.add('loaded');
   $('model-primary').textContent = file.name;
   $('model-sub').textContent = (file.size / 1024 / 1024).toFixed(1) + ' MB';
-
   try {
-    const buf = await file.arrayBuffer();
+    var buf = await file.arrayBuffer();
     ort.env.wasm.numThreads = 1;
     session = await ort.InferenceSession.create(buf, {
       executionProviders: ['wasm'],
@@ -472,203 +513,346 @@ const loadModel = async (file) => {
     });
     setStatus('model-status', 'model-dot',
       'Ready · ' + session.inputNames[0] + ' → ' + session.outputNames[0], 'ok');
-    $('image-panel').style.display = 'block';
-    updateBtn();
+    $('input-panel').style.display = 'block';
+    updateDetectBtn();
   } catch (err) {
     setStatus('model-status', 'model-dot', 'Error: ' + err.message, 'error');
     $('model-drop').classList.remove('loaded');
     session = null;
   }
-};
+}
 
-// ── Image loading ──
-const loadImage = (file) => new Promise(resolve => {
-  const url = URL.createObjectURL(file);
-  const img = new Image();
-  img.onload = () => resolve({ img, url });
-  img.onerror = () => resolve(null);
-  img.src = url;
-});
+// ── Image ──
+function loadImgFile(file) {
+  return new Promise(function(resolve) {
+    var url = URL.createObjectURL(file);
+    var img = new Image();
+    img.onload  = function() { resolve({ img: img, url: url }); };
+    img.onerror = function() { resolve(null); };
+    img.src = url;
+  });
+}
 
-const handleImage = async (file) => {
+async function handleImage(file) {
   if (!file.type.startsWith('image/')) {
     setStatus('detect-status', 'detect-dot', 'Please select an image file', 'error');
     return;
   }
-  const result = await loadImage(file);
+  var result = await loadImgFile(file);
   if (!result) {
     setStatus('detect-status', 'detect-dot', 'Failed to load image', 'error');
     return;
   }
-  const { img, url } = result;
-  imgElement = img;
-  $('img-preview').src = url;
+  imgElement = result.img;
+  $('img-preview').src = result.url;
   $('img-preview-wrap').style.display = 'block';
   $('img-drop').classList.add('loaded');
   $('img-primary').textContent = file.name;
-  $('img-sub').textContent = img.width + ' × ' + img.height + 'px';
+  $('img-sub').textContent = result.img.width + ' × ' + result.img.height + 'px';
   setStatus('detect-status', 'detect-dot', 'Image ready — tap Detect', 'ok');
-  updateBtn();
-};
+  updateDetectBtn();
+}
 
-const updateBtn = () => {
+function updateDetectBtn() {
   $('detect-btn').disabled = !(session && imgElement);
-};
+}
 
 // ── Preprocess ──
-const preprocess = (img, size) => {
+function preprocess(source, size) {
   size = size || 640;
-  const canvas = document.createElement('canvas');
+  var canvas = document.createElement('canvas');
   canvas.width = size; canvas.height = size;
-  const ctx = canvas.getContext('2d');
-  const scale = Math.min(size / img.width, size / img.height);
-  const nw = Math.round(img.width * scale);
-  const nh = Math.round(img.height * scale);
-  const padX = Math.floor((size - nw) / 2);
-  const padY = Math.floor((size - nh) / 2);
+  var ctx = canvas.getContext('2d');
+  var sw = source.videoWidth  || source.naturalWidth  || source.width  || 640;
+  var sh = source.videoHeight || source.naturalHeight || source.height || 480;
+  var scale = Math.min(size / sw, size / sh);
+  var nw = Math.round(sw * scale), nh = Math.round(sh * scale);
+  var padX = Math.floor((size - nw) / 2), padY = Math.floor((size - nh) / 2);
   ctx.fillStyle = '#808080';
   ctx.fillRect(0, 0, size, size);
-  ctx.drawImage(img, padX, padY, nw, nh);
-  const px = ctx.getImageData(0, 0, size, size).data;
-  const t = new Float32Array(3 * size * size);
-  for (let i = 0; i < size * size; i++) {
+  ctx.drawImage(source, padX, padY, nw, nh);
+  var px = ctx.getImageData(0, 0, size, size).data;
+  var t = new Float32Array(3 * size * size);
+  for (var i = 0; i < size * size; i++) {
     t[i]               = px[i * 4]     / 255;
     t[i + size * size] = px[i * 4 + 1] / 255;
     t[i + size*size*2] = px[i * 4 + 2] / 255;
   }
-  return { t, scale, padX, padY };
-};
+  return { t: t, scale: scale, padX: padX, padY: padY, sw: sw, sh: sh };
+}
 
 // ── NMS ──
-const iou = (a, b) => {
-  const x1 = Math.max(a[0], b[0]), y1 = Math.max(a[1], b[1]);
-  const x2 = Math.min(a[2], b[2]), y2 = Math.min(a[3], b[3]);
-  const inter = Math.max(0, x2 - x1) * Math.max(0, y2 - y1);
+function iou(a, b) {
+  var x1 = Math.max(a[0],b[0]), y1 = Math.max(a[1],b[1]);
+  var x2 = Math.min(a[2],b[2]), y2 = Math.min(a[3],b[3]);
+  var inter = Math.max(0,x2-x1)*Math.max(0,y2-y1);
   return inter / ((a[2]-a[0])*(a[3]-a[1]) + (b[2]-b[0])*(b[3]-b[1]) - inter + 1e-6);
-};
+}
 
-const nms = (boxes, scores, thresh) => {
-  const order = Object.keys(scores).map(Number).sort((a, b) => scores[b] - scores[a]);
-  const dead  = new Uint8Array(scores.length);
-  return order.filter(i => {
+function nms(boxes, scores, thresh) {
+  var order = [];
+  for (var i = 0; i < scores.length; i++) order.push(i);
+  order.sort(function(a,b) { return scores[b]-scores[a]; });
+  var dead = new Uint8Array(scores.length);
+  return order.filter(function(i) {
     if (dead[i]) return false;
-    order.forEach(j => { if (!dead[j] && j !== i && iou(boxes[i], boxes[j]) > thresh) dead[j] = 1; });
+    order.forEach(function(j) {
+      if (!dead[j] && j !== i && iou(boxes[i], boxes[j]) > thresh) dead[j] = 1;
+    });
     return true;
   });
-};
+}
 
-// ── Detect ──
-const runDetection = async () => {
+// ── Shared inference ──
+async function runInference(source, confT, iouT) {
+  var S = 640;
+  var prep = preprocess(source, S);
+  var feeds = {};
+  feeds[session.inputNames[0]] = new ort.Tensor('float32', prep.t, [1, 3, S, S]);
+  var result = await session.run(feeds);
+  var raw = result[session.outputNames[0]].data;
+  var numDet = result[session.outputNames[0]].dims[2];
+
+  var boxes = [], scores = [], ids = [];
+  for (var d = 0; d < numDet; d++) {
+    var maxScore = -Infinity, maxClass = 0;
+    for (var c = 0; c < 80; c++) {
+      var s = raw[d + (4 + c) * numDet];
+      if (s > maxScore) { maxScore = s; maxClass = c; }
+    }
+    if (maxScore < confT) continue;
+    var cx = raw[d], cy = raw[d+numDet], bw = raw[d+2*numDet], bh = raw[d+3*numDet];
+    boxes.push([
+      (cx - bw/2 - prep.padX) / prep.scale, (cy - bh/2 - prep.padY) / prep.scale,
+      (cx + bw/2 - prep.padX) / prep.scale, (cy + bh/2 - prep.padY) / prep.scale
+    ]);
+    scores.push(maxScore);
+    ids.push(maxClass);
+  }
+
+  return nms(boxes, scores, iouT).map(function(i) {
+    return { box: boxes[i], score: scores[i], classId: ids[i],
+             label: CLASSES[ids[i]] || ('cls' + ids[i]) };
+  });
+}
+
+// ── Draw boxes onto any canvas ──
+function drawBoxes(ctx, dets, srcW, srcH, dstW, dstH) {
+  var sx = dstW / srcW, sy = dstH / srcH;
+  var fs = Math.max(11, Math.round(dstW * 0.022));
+  ctx.font     = '700 ' + fs + 'px \'Space Mono\', monospace';
+  ctx.lineJoin = 'round';
+
+  for (var k = 0; k < dets.length; k++) {
+    var d = dets[k];
+    var x1 = d.box[0]*sx, y1 = d.box[1]*sy;
+    var x2 = d.box[2]*sx, y2 = d.box[3]*sy;
+    var color = classColor(d.classId);
+    var text  = d.label + ' ' + Math.round(d.score * 100) + '%';
+
+    ctx.strokeStyle = color;
+    ctx.lineWidth   = Math.max(1.5, dstW * 0.003);
+    ctx.strokeRect(x1, y1, x2-x1, y2-y1);
+
+    var tw = ctx.measureText(text).width;
+    var lw = tw + 10, lh = fs + 7;
+    var ly = y1 > lh + 4 ? y1 - lh - 2 : y1 + 2;
+
+    ctx.fillStyle = color;
+    ctx.beginPath();
+    if (ctx.roundRect) ctx.roundRect(x1-1, ly, lw, lh, 3);
+    else ctx.rect(x1-1, ly, lw, lh);
+    ctx.fill();
+    ctx.fillStyle = '#0a0a0f';
+    ctx.fillText(text, x1 + 4, ly + lh - 5);
+  }
+}
+
+// ── Image detection ──
+async function runDetection() {
   $('detect-btn').disabled = true;
-  const confT = $('conf-thresh').value / 100;
-  const iouT  = $('iou-thresh').value  / 100;
-  const S = 640;
+  var confT = $('conf-thresh').value / 100;
+  var iouT  = $('iou-thresh').value  / 100;
 
   try {
-    setStatus('detect-status', 'detect-dot', 'Preprocessing…', 'active');
-    const { t, scale, padX, padY } = preprocess(imgElement, S);
-
     setStatus('detect-status', 'detect-dot', 'Running inference…', 'active');
-    const feeds = {};
-    feeds[session.inputNames[0]] = new ort.Tensor('float32', t, [1, 3, S, S]);
-    const result = await session.run(feeds);
-    const raw = result[session.outputNames[0]].data;
-    const dims = result[session.outputNames[0]].dims;
-    const numDet = dims[2];
+    var dets = await runInference(imgElement, confT, iouT);
 
-    const boxes = [], scores = [], ids = [];
+    var canvas = $('output-canvas');
+    var ctx    = canvas.getContext('2d');
+    canvas.width  = imgElement.naturalWidth  || imgElement.width;
+    canvas.height = imgElement.naturalHeight || imgElement.height;
+    ctx.drawImage(imgElement, 0, 0);
+    drawBoxes(ctx, dets, canvas.width, canvas.height, canvas.width, canvas.height);
 
-    for (let d = 0; d < numDet; d++) {
-      let maxScore = -Infinity, maxClass = 0;
-      for (let c = 0; c < 80; c++) {
-        const s = raw[d + (4 + c) * numDet];
-        if (s > maxScore) { maxScore = s; maxClass = c; }
-      }
-      if (maxScore < confT) continue;
-      const cx = raw[d], cy = raw[d + numDet], bw = raw[d + 2*numDet], bh = raw[d + 3*numDet];
-      boxes.push([
-        (cx - bw/2 - padX) / scale, (cy - bh/2 - padY) / scale,
-        (cx + bw/2 - padX) / scale, (cy + bh/2 - padY) / scale
-      ]);
-      scores.push(maxScore);
-      ids.push(maxClass);
-    }
+    $('canvas-wrap').style.display = 'block';
+    $('detections-panel').style.display = 'block';
+    $('det-grid').innerHTML = dets.length
+      ? dets.slice().sort(function(a,b){return b.score-a.score;}).map(function(d) {
+          return '<div class="det-chip">' +
+            '<span class="det-label" style="color:'+classColor(d.classId)+'">'+d.label+'</span>' +
+            '<span class="det-conf">'+Math.round(d.score*100)+'%</span></div>';
+        }).join('')
+      : '<span style="color:var(--muted);font-size:12px;font-family:var(--mono)">No detections — try lowering confidence</span>';
 
-    const dets = nms(boxes, scores, iouT).map(i => ({
-      box: boxes[i], score: scores[i], classId: ids[i],
-      label: CLASSES[ids[i]] || ('cls' + ids[i])
-    }));
-
-    draw(dets);
     setStatus('detect-status', 'detect-dot',
       dets.length + ' object' + (dets.length !== 1 ? 's' : '') + ' detected', 'ok');
+    $('canvas-wrap').scrollIntoView({ behavior: 'smooth', block: 'start' });
   } catch (err) {
     setStatus('detect-status', 'detect-dot', 'Error: ' + err.message, 'error');
     console.error(err);
   }
-
   $('detect-btn').disabled = false;
-};
+}
 
-// ── Draw ──
-const draw = (dets) => {
-  const canvas = $('output-canvas');
-  const ctx    = canvas.getContext('2d');
-  canvas.width  = imgElement.width;
-  canvas.height = imgElement.height;
-  ctx.drawImage(imgElement, 0, 0);
+// ── Webcam ──
+async function enumerateCameras() {
+  try {
+    var devices = await navigator.mediaDevices.enumerateDevices();
+    camDevices = devices.filter(function(d) { return d.kind === 'videoinput'; });
+    var sel = $('cam-select');
+    sel.innerHTML = '';
+    camDevices.forEach(function(d, i) {
+      var opt = document.createElement('option');
+      opt.value = d.deviceId;
+      opt.textContent = d.label || ('Camera ' + (i + 1));
+      sel.appendChild(opt);
+    });
+    $('cam-select-wrap').style.display = camDevices.length > 1 ? 'block' : 'none';
+  } catch(e) {}
+}
 
-  const fs = Math.max(13, Math.round(imgElement.width * 0.018));
-  ctx.font     = '700 ' + fs + 'px \'Space Mono\', monospace';
-  ctx.lineJoin = 'round';
+async function startCamera() {
+  if (!session) {
+    setStatus('cam-status', 'cam-dot', 'Load a model first', 'error');
+    return;
+  }
+  setStatus('cam-status', 'cam-dot', 'Requesting camera access…', 'active');
 
-  for (let k = 0; k < dets.length; k++) {
-    const d = dets[k];
-    const x1 = d.box[0], y1 = d.box[1], x2 = d.box[2], y2 = d.box[3];
-    const color = classColor(d.classId);
-    const text  = d.label + ' ' + Math.round(d.score * 100) + '%';
+  try {
+    var sel = $('cam-select');
+    var constraints = {
+      video: sel.value
+        ? { deviceId: { exact: sel.value }, width: { ideal: 640 }, height: { ideal: 480 } }
+        : { facingMode: facingMode, width: { ideal: 640 }, height: { ideal: 480 } },
+      audio: false
+    };
 
-    ctx.strokeStyle = color;
-    ctx.lineWidth   = Math.max(2, imgElement.width * 0.003);
-    ctx.strokeRect(x1, y1, x2 - x1, y2 - y1);
+    camStream = await navigator.mediaDevices.getUserMedia(constraints);
+    var video = $('webcam-video');
+    video.srcObject = camStream;
+    await video.play();
 
-    const tw = ctx.measureText(text).width;
-    const lw = tw + 12, lh = fs + 8;
-    const ly = y1 > lh + 4 ? y1 - lh - 2 : y1 + 2;
+    // Enumerate devices now that permission is granted
+    await enumerateCameras();
 
-    ctx.fillStyle = color;
-    ctx.beginPath();
-    if (ctx.roundRect) {
-      ctx.roundRect(x1 - 1, ly, lw, lh, 4);
-    } else {
-      ctx.rect(x1 - 1, ly, lw, lh);
+    // Show canvas, hide placeholder
+    $('webcam-placeholder').style.display = 'none';
+    video.style.display = 'none';           // we draw to canvas, not the video element
+    $('webcam-canvas').style.display = 'block';
+    $('cam-overlay').style.display   = 'flex';
+
+    $('cam-start-btn').style.display = 'none';
+    $('cam-stop-btn').style.display  = 'block';
+    $('cam-flip-btn').style.display  = camDevices.length > 1 ? 'block' : 'none';
+
+    camRunning = true;
+    inferBusy  = false;
+    lastFpsTs  = performance.now();
+    fpsFrames  = 0;
+    setStatus('cam-status', 'cam-dot', 'Live · detecting objects…', 'live');
+    camLoop();
+  } catch (err) {
+    setStatus('cam-status', 'cam-dot', 'Camera error: ' + err.message, 'error');
+    console.error(err);
+  }
+}
+
+function stopCamera() {
+  camRunning = false;
+  if (camAnimId) cancelAnimationFrame(camAnimId);
+  camAnimId = null;
+  if (camStream) { camStream.getTracks().forEach(function(t){ t.stop(); }); camStream = null; }
+
+  var video = $('webcam-video');
+  video.srcObject = null;
+  video.style.display = 'none';
+  $('webcam-canvas').style.display = 'none';
+  $('webcam-placeholder').style.display = 'flex';
+  $('cam-overlay').style.display = 'none';
+
+  $('cam-start-btn').style.display = 'block';
+  $('cam-stop-btn').style.display  = 'none';
+  $('cam-flip-btn').style.display  = 'none';
+
+  setStatus('cam-status', 'cam-dot', 'Camera stopped', '');
+}
+
+async function flipCamera() {
+  facingMode = facingMode === 'user' ? 'environment' : 'user';
+  // Clear device selection so facingMode constraint is used
+  $('cam-select').value = '';
+  stopCamera();
+  await startCamera();
+}
+
+function camLoop() {
+  if (!camRunning) return;
+
+  var video  = $('webcam-video');
+  var canvas = $('webcam-canvas');
+  var ctx    = canvas.getContext('2d');
+
+  if (video.readyState >= 2) {
+    var vw = video.videoWidth, vh = video.videoHeight;
+    if (vw > 0 && vh > 0) {
+      if (canvas.width !== vw || canvas.height !== vh) {
+        canvas.width = vw; canvas.height = vh;
+      }
+
+      // Draw latest video frame
+      ctx.drawImage(video, 0, 0, vw, vh);
+
+      // Kick off inference if previous finished
+      if (!inferBusy) {
+        inferBusy = true;
+        var confT = $('cam-conf').value / 100;
+        var iouT  = $('cam-iou').value  / 100;
+
+        // Snapshot to avoid tearing during async inference
+        var snap = document.createElement('canvas');
+        snap.width = vw; snap.height = vh;
+        snap.getContext('2d').drawImage(video, 0, 0, vw, vh);
+
+        runInference(snap, confT, iouT).then(function(dets) {
+          // Redraw video frame + detections atomically
+          ctx.drawImage(video, 0, 0, vw, vh);
+          drawBoxes(ctx, dets, vw, vh, vw, vh);
+          $('count-badge').textContent = dets.length + ' object' + (dets.length !== 1 ? 's' : '');
+          inferBusy = false;
+        }).catch(function() { inferBusy = false; });
+      }
+
+      // FPS
+      fpsFrames++;
+      var now = performance.now();
+      if (now - lastFpsTs >= 1000) {
+        $('fps-badge').textContent = Math.round(fpsFrames * 1000 / (now - lastFpsTs)) + ' FPS';
+        fpsFrames = 0; lastFpsTs = now;
+      }
     }
-    ctx.fill();
-    ctx.fillStyle = '#0a0a0f';
-    ctx.fillText(text, x1 + 5, ly + lh - 6);
   }
 
-  $('canvas-wrap').style.display = 'block';
-  $('detections-panel').style.display = 'block';
-
-  $('det-grid').innerHTML = dets.length
-    ? dets
-        .slice().sort((a, b) => b.score - a.score)
-        .map(function(d) {
-          return '<div class="det-chip">' +
-            '<span class="det-label" style="color:' + classColor(d.classId) + '">' + d.label + '</span>' +
-            '<span class="det-conf">' + Math.round(d.score * 100) + '%</span>' +
-            '</div>';
-        }).join('')
-    : '<span style="color:var(--muted);font-size:12px;font-family:var(--mono)">No detections — try lowering confidence</span>';
-
-  $('canvas-wrap').scrollIntoView({ behavior: 'smooth', block: 'start' });
-};
+  camAnimId = requestAnimationFrame(camLoop);
+}
 
 // ── Wire up ──
 setupDrop('model-drop', 'model-file-input', loadModel);
 setupDrop('img-drop',   'img-file-input',   handleImage);
 $('detect-btn').addEventListener('click', runDetection);
+$('cam-select').addEventListener('change', function() {
+  if (camRunning) { stopCamera(); startCamera(); }
+});
 </script>
 </body>
 </html>
